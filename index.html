@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CircuitLab — Laboratorio de circuitos eléctricos</title>
+  <meta name="description" content="Aplicación web educativa para calcular y analizar circuitos eléctricos mediante la Ley de Ohm y las leyes de Kirchhoff." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== Cabecera / Navegación ===== -->
+  <header class="app-header">
+    <div class="app-header__brand">
+      <span class="logo-mark" aria-hidden="true">⚡</span>
+      <span class="logo-text">Circuit<strong>Lab</strong></span>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="app-nav" id="appNav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="#inicio" class="is-active">Inicio</a></li>
+        <li><a href="#calculadoras">Calculadoras</a></li>
+        <li><a href="#analisis">Análisis</a></li>
+        <li><a href="#kirchhoff">Kirchhoff</a></li>
+        <li><a href="#aprender">Aprender</a></li>
+        <li><a href="#desafios">Desafíos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== Contenido principal ===== -->
+  <main class="app-main">
+
+    <!-- Sección: Inicio -->
+    <section id="inicio" class="section section--hero">
+      <p class="hero__eyebrow">Laboratorio de circuitos eléctricos</p>
+      <h1 class="hero__title">Bienvenido a <span class="accent">CircuitLab</span></h1>
+      <p class="hero__subtitle">
+        Calcula, analiza y comprende circuitos eléctricos resistivos de corriente continua.
+        Introduce tus datos, observa el procedimiento paso a paso y exporta tus resultados.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#calculadoras" class="btn btn--primary">Empezar a calcular</a>
+        <a href="#aprender" class="btn btn--ghost">Aprender los conceptos</a>
+      </div>
+    </section>
+
+    <!-- Sección: Accesos rápidos a módulos -->
+    <section class="section">
+      <header class="section__header">
+        <h2 class="section__title">Módulos de la aplicación</h2>
+        <p class="section__lead">Elige una herramienta para comenzar.</p>
+      </header>
+
+      <div class="card-grid">
+
+        <article class="card card--voltage" id="calculadoras">
+          <header class="card__header">
+            <span class="card__icon" aria-hidden="true">🧮</span>
+            <h3 class="card__title">Calculadoras eléctricas</h3>
+          </header>
+          <p class="card__desc">
+            Ley de Ohm, potencia eléctrica y resistencia equivalente (serie y paralelo).
+          </p>
+          <ul class="card__list">
+            <li>Ley de Ohm</li>
+            <li>Potencia eléctrica</li>
+            <li>Resistencia equivalente</li>
+          </ul>
+          <span class="card__badge">Próximamente</span>
+        </article>
+
+        <article class="card card--current" id="analisis">
+          <header class="card__header">
+            <span class="card__icon" aria-hidden="true">🔌</span>
+            <h3 class="card__title">Análisis de circuitos</h3>
+          </header>
+          <p class="card__desc">
+            Circuitos en serie, en paralelo y mixtos con procedimiento detallado.
+          </p>
+          <ul class="card__list">
+            <li>Serie</li>
+            <li>Paralelo</li>
+            <li>Mixtos prediseñados</li>
+          </ul>
+          <span class="card__badge">Próximamente</span>
+        </article>
+
+        <article class="card card--resistance" id="kirchhoff">
+          <header class="card__header">
+            <span class="card__icon" aria-hidden="true">📐</span>
+            <h3 class="card__title">Leyes de Kirchhoff</h3>
+          </header>
+          <p class="card__desc">
+            Comprobación de la ley de corrientes y de la ley de voltajes, con resolución de circuitos.
+          </p>
+          <ul class="card__list">
+            <li>Ley de corrientes</li>
+            <li>Ley de voltajes</li>
+            <li>Resolución por sistemas</li>
+          </ul>
+          <span class="card__badge">Próximamente</span>
+        </article>
+
+        <article class="card card--power" id="aprender">
+          <header class="card__header">
+            <span class="card__icon" aria-hidden="true">📚</span>
+            <h3 class="card__title">Aprender</h3>
+          </header>
+          <p class="card__desc">
+            Explicaciones sencillas, fórmulas y ejemplos resueltos de electricidad básica.
+          </p>
+          <ul class="card__list">
+            <li>Magnitudes eléctricas</li>
+            <li>Ley de Ohm y potencia</li>
+            <li>Circuitos y Kirchhoff</li>
+          </ul>
+          <span class="card__badge">Próximamente</span>
+        </article>
+
+        <article class="card card--success" id="desafios">
+          <header class="card__header">
+            <span class="card__icon" aria-hidden="true">🎯</span>
+            <h3 class="card__title">Desafíos</h3>
+          </header>
+          <p class="card__desc">
+            Ejercicios interactivos de opción múltiple con puntuación y explicaciones.
+          </p>
+          <ul class="card__list">
+            <li>Conceptos</li>
+            <li>Cálculos</li>
+            <li>Circuitos y leyes</li>
+          </ul>
+          <span class="card__badge">Próximamente</span>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Sección: Magnitudes eléctricas -->
+    <section class="section">
+      <header class="section__header">
+        <h2 class="section__title">Magnitudes eléctricas</h2>
+        <p class="section__lead">Un repaso rápido de las magnitudes que utilizaremos.</p>
+      </header>
+
+      <div class="magnitude-grid">
+        <div class="magnitude magnitude--voltage">
+          <span class="magnitude__symbol" aria-hidden="true">V</span>
+          <h4 class="magnitude__title">Voltaje</h4>
+          <p class="magnitude__desc">Diferencia de potencial. Se mide en voltios (V).</p>
+        </div>
+        <div class="magnitude magnitude--current">
+          <span class="magnitude__symbol" aria-hidden="true">I</span>
+          <h4 class="magnitude__title">Corriente</h4>
+          <p class="magnitude__desc">Flujo de carga eléctrica. Se mide en amperios (A).</p>
+        </div>
+        <div class="magnitude magnitude--resistance">
+          <span class="magnitude__symbol" aria-hidden="true">R</span>
+          <h4 class="magnitude__title">Resistencia</h4>
+          <p class="magnitude__desc">Oposición al paso de la corriente. Se mide en ohmios (Ω).</p>
+        </div>
+        <div class="magnitude magnitude--power">
+          <span class="magnitude__symbol" aria-hidden="true">P</span>
+          <h4 class="magnitude__title">Potencia</h4>
+          <p class="magnitude__desc">Energía por unidad de tiempo. Se mide en vatios (W).</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Pie de página ===== -->
+  <footer class="app-footer">
+    <p>CircuitLab — Proyecto educativo de circuitos eléctricos.</p>
+    <p class="app-footer__version">Versión 0.1 · Fase 1</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
