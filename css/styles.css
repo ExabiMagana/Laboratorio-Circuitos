@@ -486,19 +486,122 @@ img, svg { max-width: 100%; display: block; }
 .app-footer {
   border-top: 1px solid var(--border);
   background: var(--bg-alt);
-  padding: var(--space-5);
-  text-align: center;
-  color: var(--text-muted);
-  font-size: .85rem;
+  color: var(--text-soft);
+  font-size: .88rem;
+  margin-top: var(--space-7);
 }
 
-.app-footer p { margin: 0 0 var(--space-1); }
-.app-footer__version {
+.app-footer__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.app-footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.app-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 1.05rem;
+  color: var(--text-strong);
+  margin-bottom: var(--space-1);
+}
+
+.app-footer__desc {
+  color: var(--text-soft);
+  font-size: .85rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.app-footer__title {
   font-family: var(--font-mono);
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
   color: var(--text-muted);
+  margin: 0 0 var(--space-2);
+  padding-bottom: var(--space-1);
+  border-bottom: 1px solid var(--border);
+}
+
+.app-footer__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.app-footer__list li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.app-footer__name {
+  color: var(--text-strong);
+  font-weight: 500;
+  font-size: .9rem;
+}
+
+.app-footer__role {
+  color: var(--text-muted);
+  font-size: .78rem;
+}
+
+.app-footer__meta {
+  color: var(--text-soft);
+  font-size: .85rem;
+  font-family: var(--font-mono);
+}
+
+.app-footer__bottom {
+  border-top: 1px solid var(--border);
+  padding: var(--space-3) var(--space-5);
+  text-align: center;
+}
+
+.app-footer__bottom p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: .8rem;
+}
+
+/* Enlaces dentro del footer */
+.app-footer a {
+  color: var(--brand-strong);
+  border-bottom: 1px solid transparent;
+}
+.app-footer a:hover {
+  color: var(--brand);
+  border-bottom-color: currentColor;
 }
 
 /* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .app-footer__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-footer__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    padding: var(--space-5) var(--space-4);
+  }
+}
+
 @media (max-width: 720px) {
   .nav-toggle { display: flex; }
   .app-nav {

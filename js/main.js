@@ -37,6 +37,14 @@
 
   document.addEventListener("DOMContentLoaded", updateActiveLink);
 
+  /* ---------- Año actual en el footer ---------- */
+  document.addEventListener("DOMContentLoaded", () => {
+    const anio = String(new Date().getFullYear());
+    document.querySelectorAll(".footer-anio, #footer-anio").forEach((el) => {
+      el.textContent = anio;
+    });
+  });
+
   window.CircuitLab = window.CircuitLab || {};
 
   window.CircuitLab.round = function (value, decimals = 4) {

@@ -92,9 +92,7 @@ CircuitLab/
 │ ├── aprender.js (UI aprender)
 │ ├── preguntas.js (banco de preguntas)
 │ ├── desafios.js (UI desafíos)
-│ ├── pdf.js (exportación a PDF)
-│ └── tests.js (pruebas del motor — solo desarrollo)
-├── assets/
+│ └── pdf.js (exportación a PDF)
 ├── pages/
 │ ├── calculadoras.html
 │ ├── analisis.html
