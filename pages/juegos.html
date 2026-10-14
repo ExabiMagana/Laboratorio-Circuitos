@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juegos — Circuit Survival — CircuitLab</title>
+  <meta name="description" content="Minijuego arcade educativo: resuelve ejercicios eléctricos antes de que los enemigos te alcancen." />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="app-header__brand">
+      <a class="brand-link" href="../index.html">
+        <span class="logo-mark" aria-hidden="true">⚡</span>
+        <span class="logo-text">Circuit<strong>Lab</strong></span>
+      </a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="app-nav" id="appNav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="../index.html" data-page="inicio">Inicio</a></li>
+        <li><a href="calculadoras.html" data-page="calculadoras">Calculadoras</a></li>
+        <li><a href="analisis.html" data-page="analisis">Análisis</a></li>
+        <li><a href="kirchhoff.html" data-page="kirchhoff">Kirchhoff</a></li>
+        <li><a href="aprender.html" data-page="aprender">Aprender</a></li>
+        <li><a href="desafios.html" data-page="desafios">Desafíos</a></li>
+        <li><a href="juegos.html" data-page="juegos">Juegos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="app-main">
+
+    <nav class="breadcrumb" aria-label="Ruta de navegación">
+      <a href="../index.html">Inicio</a>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <span class="breadcrumb__current">Juegos</span>
+    </nav>
+
+    <header class="page-header">
+      <h1 class="page-header__title">Circuit Survival</h1>
+      <p class="page-header__lead">
+        Resuelve ejercicios eléctricos antes de que los enemigos te alcancen.
+        Cada respuesta correcta te acerca a la supervivencia.
+      </p>
+    </header>
+
+    <div id="cs-root" class="cs-root">
+
+      <section class="cs-pantalla cs-pantalla--inicio" id="cs-pantalla-inicio">
+
+        <div class="cs-inicio">
+
+          <div class="cs-inicio__hero">
+            <div class="cs-inicio__personaje" aria-hidden="true">
+              <!-- Personaje representado con SVG simple -->
+              <svg viewBox="0 0 120 120" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+                <!-- aura eléctrica -->
+                <circle cx="60" cy="60" r="52" class="cs-svg-aura" />
+                <!-- cuerpo -->
+                <circle cx="60" cy="60" r="34" class="cs-svg-cuerpo" />
+                <!-- rayo en el centro -->
+                <path d="M 62 34 L 48 62 L 58 62 L 52 88 L 76 56 L 64 56 Z" class="cs-svg-rayo" />
+                <!-- ojos -->
+                <circle cx="50" cy="52" r="3" class="cs-svg-ojo" />
+                <circle cx="70" cy="52" r="3" class="cs-svg-ojo" />
+              </svg>
+            </div>
+
+            <div class="cs-inicio__texto">
+              <h2 class="cs-inicio__titulo">Circuit Survival</h2>
+              <p class="cs-inicio__lema">
+                Un minijuego arcade para poner a prueba tus conocimientos de electricidad.
+              </p>
+            </div>
+          </div>
+
+          <div class="cs-inicio__reglas">
+            <h3>Cómo se juega</h3>
+            <ul class="feature-list">
+              <li>Aparecerán enemigos en la arena y avanzarán hacia ti.</li>
+              <li>Cada enemigo se combate resolviendo una pregunta de electricidad.</li>
+              <li><strong>Respuesta correcta:</strong> atacas y eliminas un enemigo.</li>
+              <li><strong>Respuesta incorrecta o tiempo agotado:</strong> recibes daño.</li>
+              <li>Empiezas con <strong>5 puntos de vida</strong>. Sobrevive el mayor número de oleadas posible.</li>
+              <li>Cada oleada es más rápida que la anterior. ¡No te duermas!</li>
+            </ul>
+          </div>
+
+          <div class="cs-inicio__acciones">
+            <button type="button" class="btn btn--primary cs-btn-grande" id="cs-btn-iniciar">
+              ▶ Iniciar partida
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="cs-pantalla cs-pantalla--juego" id="cs-pantalla-juego" hidden>
+
+        <!-- HUD superior -->
+        <div class="cs-hud" role="status" aria-live="polite" aria-label="Información de la partida">
+          <div class="cs-hud__item cs-hud__item--vida">
+            <span class="cs-hud__label">Vida</span>
+            <div class="cs-hud__vida" id="cs-hud-vida">
+              <!-- Corazones se inyectan desde juegos.js -->
+            </div>
+          </div>
+          <div class="cs-hud__item">
+            <span class="cs-hud__label">Puntuación</span>
+            <span class="cs-hud__valor" id="cs-hud-puntuacion">0</span>
+          </div>
+          <div class="cs-hud__item">
+            <span class="cs-hud__label">Oleada</span>
+            <span class="cs-hud__valor" id="cs-hud-oleada">1</span>
+          </div>
+        <div class="cs-hud__item">
+            <span class="cs-hud__label">Derrotados</span>
+            <span class="cs-hud__valor" id="cs-hud-derrotados">0</span>
+          </div>
+          <div class="cs-hud__item cs-hud__item--racha">
+            <span class="cs-hud__label">Racha</span>
+            <div class="cs-racha">
+              <span class="cs-racha__icono" id="cs-hud-racha-icono" aria-hidden="true">🔥</span>
+              <span class="cs-hud__valor cs-racha__valor" id="cs-hud-racha">0</span>
+              <div class="cs-racha__barra" id="cs-hud-racha-barra">
+                <div class="cs-racha__barra-relleno" id="cs-hud-racha-relleno"></div>
+              </div>
+            </div>
+          </div>
+          <div class="cs-hud__acciones">
+            <button type="button" class="btn btn--ghost btn--sm" id="cs-btn-pausa" aria-label="Pausar partida">
+              ⏸ Pausar
+            </button>
+            <button type="button" class="btn btn--ghost btn--sm" id="cs-btn-salir" title="Salir">
+              ← Salir
+            </button>
+          </div>
+        </div>
+
+        <!-- Arena -->
+        <div class="cs-arena-wrapper">
+          <div class="cs-arena" id="cs-arena" role="region" aria-label="Arena de juego">
+            <!-- Capa de personaje y enemigos (se inyectan desde juegos.js) -->
+            <div class="cs-arena__capa" id="cs-capa-actores"></div>
+
+            <!-- Capa de efectos (destellos, descargas, textos flotantes) -->
+            <div class="cs-arena__capa cs-arena__capa--efectos" id="cs-capa-efectos"></div>
+
+                        <!-- Veladura de pausa -->
+            <div class="cs-arena__velo" id="cs-velo-pausa" hidden>
+              <p class="cs-arena__velo-texto">Partida pausada</p>
+              <p class="cs-arena__velo-subtexto">El tiempo y los enemigos están detenidos</p>
+              <div class="cs-arena__velo-acciones">
+                <button type="button" class="btn btn--primary btn--sm" id="cs-btn-reanudar">
+                  ▶ Reanudar
+                </button>
+                <button type="button" class="btn btn--ghost btn--sm" id="cs-btn-salir-pausa">
+                  ← Salir al menú
+                </button>
+              </div>
+            </div>
+
+            <!-- Veladura de fin -->
+            <div class="cs-arena__velo cs-arena__velo--fin" id="cs-velo-fin" hidden>
+              <p class="cs-arena__velo-texto">Fin de la partida</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aviso de atajos de teclado (solo visible en pantallas grandes) -->
+        <p class="cs-atajos" aria-hidden="true">
+          Atajos: <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> para responder ·
+          <kbd>Esc</kbd> para pausar
+        </p>
+
+        <!-- Panel de pregunta -->
+        <div class="cs-pregunta" id="cs-pregunta" role="region" aria-label="Pregunta actual" aria-live="assertive">
+
+          <!-- Cabecera del panel: categoría + temporizador -->
+          <div class="cs-pregunta__cabecera">
+            <span class="cs-pregunta__categoria" id="cs-pregunta-categoria">—</span>
+            <div class="cs-pregunta__tiempo">
+              <div class="cs-tiempo" id="cs-tiempo" aria-label="Tiempo restante">
+                <div class="cs-tiempo__barra" id="cs-tiempo-barra"></div>
+              </div>
+              <span class="cs-pregunta__tiempo-texto" id="cs-tiempo-texto">-- s</span>
+            </div>
+          </div>
+
+          <!-- Enunciado -->
+          <p class="cs-pregunta__enunciado" id="cs-pregunta-enunciado">
+            Cargando pregunta…
+          </p>
+
+          <!-- Opciones -->
+          <div class="cs-pregunta__opciones" id="cs-pregunta-opciones">
+            <!-- Se inyectan desde juegos.js -->
+          </div>
+
+        <!-- Explicación (oculta hasta responder) -->
+          <div class="cs-pregunta__explicacion" id="cs-pregunta-explicacion" role="alert" hidden></div>
+
+        </div>
+
+      </section>
+
+      <section class="cs-pantalla cs-pantalla--fin" id="cs-pantalla-fin" hidden>
+        <div class="cs-fin">
+
+          <header class="cs-fin__header">
+            <p class="cs-fin__etiqueta">Fin de la partida</p>
+            <h2 class="cs-fin__titulo" id="cs-fin-motivo">—</h2>
+          </header>
+
+          <div class="cs-fin__resumen">
+            <div class="cs-fin__tile cs-fin__tile--principal">
+              <span class="cs-fin__tile-label">Puntuación final</span>
+              <span class="cs-fin__tile-valor" id="cs-fin-puntuacion">0</span>
+            </div>
+            <div class="cs-fin__tile">
+              <span class="cs-fin__tile-label">Oleada alcanzada</span>
+              <span class="cs-fin__tile-valor" id="cs-fin-oleada">1</span>
+            </div>
+            <div class="cs-fin__tile">
+              <span class="cs-fin__tile-label">Enemigos derrotados</span>
+              <span class="cs-fin__tile-valor" id="cs-fin-derrotados">0</span>
+            </div>
+          </div>
+
+          <div class="cs-fin__detalles">
+            <div class="cs-fin__detalle">
+              <span class="cs-fin__detalle-label">Aciertos</span>
+              <span class="cs-fin__detalle-valor cs-fin__detalle-valor--ok" id="cs-fin-aciertos">0</span>
+            </div>
+            <div class="cs-fin__detalle">
+              <span class="cs-fin__detalle-label">Errores</span>
+              <span class="cs-fin__detalle-valor cs-fin__detalle-valor--ko" id="cs-fin-errores">0</span>
+            </div>
+            <div class="cs-fin__detalle">
+              <span class="cs-fin__detalle-label">Precisión</span>
+              <span class="cs-fin__detalle-valor" id="cs-fin-precision">0%</span>
+            </div>
+            <div class="cs-fin__detalle">
+              <span class="cs-fin__detalle-label">Mejor racha</span>
+              <span class="cs-fin__detalle-valor cs-fin__detalle-valor--racha" id="cs-fin-racha">0</span>
+            </div>
+          </div>
+
+          <p class="cs-fin__mensaje" id="cs-fin-mensaje">
+            ¡Buen intento!
+          </p>
+
+          <div class="cs-fin__acciones">
+            <button type="button" class="btn btn--primary cs-btn-grande" id="cs-btn-reintentar">
+              🔁 Volver a jugar
+            </button>
+            <button type="button" class="btn btn--ghost" id="cs-btn-salir-fin">
+              ← Salir al menú de juegos
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <footer class="app-footer">
+    <div class="app-footer__inner">
+
+      <div class="app-footer__col">
+        <div class="app-footer__brand">
+          <span class="logo-mark" aria-hidden="true">⚡</span>
+          <span class="logo-text">Circuit<strong>Lab</strong></span>
+        </div>
+        <p class="app-footer__desc">
+          Aplicación web educativa para calcular, analizar y comprender circuitos
+          eléctricos resistivos de corriente continua mediante la Ley de Ohm
+          y las leyes de Kirchhoff.
+        </p>
+      </div>
+
+      <div class="app-footer__col">
+        <h3 class="app-footer__title">Desarrolladores</h3>
+        <ul class="app-footer__list">
+          <li>
+            <span class="app-footer__name">Exabí Magaña</span>
+          </li>
+          <li>
+            <span class="app-footer__name">Marvin Orellana</span>
+          </li>
+          <li>
+            <span class="app-footer__name">Óscar Orellana</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="app-footer__col">
+        <h3 class="app-footer__title">Proyecto</h3>
+        <ul class="app-footer__list">
+          <li><span class="app-footer__meta">Versión 1.0</span></li>
+          <li><span class="app-footer__meta">Uso educativo</span></li>
+          <li><span class="app-footer__meta">Año <span class="footer-anio"></span></span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="app-footer__bottom">
+      <p>CircuitLab · Proyecto educativo de circuitos eléctricos</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/preguntas.js"></script>
+  <script src="../js/preguntas-juego.js"></script>
+  <script src="../js/juegos.js"></script>
+</body>
+</html>

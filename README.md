@@ -87,14 +87,17 @@ CircuitLab/
 │ ├── calculadoras.js (UI calculadoras)
 │ ├── diagramas.js (SVG de circuitos)
 │ ├── analisis.js (UI análisis)
+│ ├── juegos.js (UI del minijuego)
 │ ├── kirchhoff.js (UI Kirchhoff)
 │ ├── lecciones.js (contenido educativo)
 │ ├── aprender.js (UI aprender)
 │ ├── preguntas.js (banco de preguntas)
+│ ├── preguntas-juegos.js (adaptador del banco de preguntas)
 │ ├── desafios.js (UI desafíos)
 │ └── pdf.js (exportación a PDF)
 ├── pages/
 │ ├── calculadoras.html
+│ ├── juegos.html
 │ ├── analisis.html
 │ ├── kirchhoff.html
 │ ├── aprender.html

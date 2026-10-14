@@ -587,7 +587,7 @@ img, svg { max-width: 100%; display: block; }
   border-bottom-color: currentColor;
 }
 
-/* ---------- Responsive ---------- */
+/* ---------- 17. Responsive ---------- */
 @media (max-width: 900px) {
   .app-footer__inner {
     grid-template-columns: 1fr 1fr;
@@ -638,7 +638,7 @@ img, svg { max-width: 100%; display: block; }
   .btn { justify-content: center; }
 }
 
-/* ---------- 02. ACCESIBILIDAD ---------- */
+/* ---------- 18. ACCESIBILIDAD ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
@@ -1099,7 +1099,7 @@ img, svg { max-width: 100%; display: block; }
   }
 }
 
-/* ---------- 14. RESPONSIVE — COMPONENTES ---------- */
+/* ---------- 17. RESPONSIVE — COMPONENTES ---------- */
 @media (max-width: 720px) {
   .alert { padding: var(--space-3) var(--space-4); }
   .result-card { padding: var(--space-4); }
@@ -1637,7 +1637,7 @@ img, svg { max-width: 100%; display: block; }
   border-top: 1px solid var(--border);
 }
 
-/* ---------- Responsive ---------- */
+/* ---------- 17. Responsive ---------- */
 @media (max-width: 900px) {
   .lesson-layout {
     grid-template-columns: 1fr;
@@ -1960,7 +1960,7 @@ img, svg { max-width: 100%; display: block; }
   border-top: 1px dashed var(--border);
 }
 
-/* ---------- Responsive ---------- */
+/* ---------- 17. Responsive ---------- */
 @media (max-width: 720px) {
   .quiz {
     padding: var(--space-4);
@@ -1983,4 +1983,1156 @@ img, svg { max-width: 100%; display: block; }
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+/* CIRCUIT SURVIVAL (Juegos) */
+/* ---------- Tarjeta especial del minijuego en la portada ---------- */
+.card--game {
+  --card-accent: var(--brand);
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--brand) 6%, var(--bg-surface)),
+      var(--bg-surface));
+}
+.card--game .card__icon {
+  color: var(--brand);
+  border-color: color-mix(in srgb, var(--brand) 30%, var(--border));
+}
+
+/* ---------- Contenedor raíz ---------- */
+.cs-root {
+  --cs-bg-arena:     #16397e;
+  --cs-bg-arena-2:   #12306b;
+  --cs-linea:        #1c2740;
+  --cs-acento:       var(--brand);
+  --cs-peligro:      var(--c-error);
+  --cs-exito:        var(--c-success);
+  --cs-corazon:      #ef4444;
+
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Todas las pantallas ocupan el ancho del contenedor raíz */
+.cs-pantalla {
+  animation: cs-fade-in .22s ease;
+}
+.cs-pantalla[hidden] { display: none; }
+
+@keyframes cs-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Pantalla de inicio */
+
+.cs-inicio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.cs-inicio__hero {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--cs-acento);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  flex-wrap: wrap;
+}
+
+.cs-inicio__personaje {
+  flex-shrink: 0;
+}
+
+.cs-inicio__texto {
+  flex: 1 1 260px;
+}
+
+.cs-inicio__titulo {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  color: var(--text-strong);
+  margin: 0 0 var(--space-2);
+  letter-spacing: -0.02em;
+}
+
+.cs-inicio__lema {
+  color: var(--text-soft);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.cs-inicio__reglas {
+  padding: var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.cs-inicio__reglas h3 {
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+  color: var(--text-strong);
+  font-size: 1.05rem;
+}
+
+.cs-inicio__acciones {
+  display: flex;
+  justify-content: center;
+}
+
+.cs-btn-grande {
+  font-size: 1.05rem;
+  padding: var(--space-4) var(--space-6);
+}
+
+/* SVG del personaje (inicio) */
+
+.cs-svg-aura {
+  fill: none;
+  stroke: var(--cs-acento);
+  stroke-width: 2;
+  stroke-dasharray: 4 6;
+  opacity: .55;
+}
+
+.cs-svg-cuerpo {
+  fill: var(--bg-alt);
+  stroke: var(--cs-acento);
+  stroke-width: 3;
+}
+
+.cs-svg-rayo {
+  fill: var(--c-power);
+  stroke: var(--c-power);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.cs-svg-ojo {
+  fill: var(--text-strong);
+}
+
+/* SVG del enemigo */
+
+.cs-svg-enemigo-cuerpo {
+  fill: color-mix(in srgb, var(--c-resistance) 90%, var(--cs-bg-arena));
+  stroke: var(--c-resistance);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.cs-svg-enemigo-ojo {
+  fill: var(--brand);
+}
+
+.cs-svg-enemigo-boca {
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+/* Pantalla de juego · HUD */
+
+.cs-hud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-3);
+}
+
+.cs-hud__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 90px;
+}
+
+.cs-hud__label {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-muted);
+}
+
+.cs-hud__valor {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.cs-hud__vida {
+  display: flex;
+  gap: 3px;
+}
+
+.cs-corazon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.cs-corazon--lleno { color: var(--cs-corazon); }
+.cs-corazon--vacio { color: var(--border-strong); }
+
+.cs-hud__acciones {
+  margin-left: auto;
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* Arena */
+
+.cs-arena-wrapper {
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-3);
+  box-shadow: var(--shadow-md);
+}
+
+.cs-arena {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 8 / 5;
+  min-height: 320px;
+  border: 2px solid var(--cs-linea);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  /* Fondo oscuro con cuadrícula técnica sutil */
+  background-color: var(--cs-bg-arena);
+  background-image:
+    linear-gradient(rgba(56, 189, 248, .04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, .04) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%,
+      var(--cs-bg-arena-2) 0%,
+      var(--cs-bg-arena) 100%);
+  background-size: 32px 32px, 32px 32px, 100% 100%;
+}
+
+.cs-arena__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  padding: var(--space-4);
+  pointer-events: none;
+}
+
+.cs-arena__placeholder p {
+  margin: 0 0 var(--space-2);
+}
+
+.cs-arena__placeholder-small {
+  font-size: .8rem;
+  opacity: .7;
+}
+
+/* Panel de pregunta */
+
+.cs-pregunta {
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: border-color .2s, box-shadow .2s;
+}
+
+/* Estados globales del panel */
+.cs-pregunta--acierto {
+  border-color: var(--c-success);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-success) 20%, transparent), var(--shadow-sm);
+}
+
+.cs-pregunta--fallo {
+  border-color: var(--c-error);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-error) 20%, transparent), var(--shadow-sm);
+}
+
+/* ---------- 03. Cabecera ---------- */
+.cs-pregunta__cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.cs-pregunta__categoria {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-muted);
+}
+
+.cs-pregunta__tiempo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 160px;
+}
+
+.cs-tiempo {
+  width: 110px;
+  height: 8px;
+  background: var(--bg-alt);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.cs-tiempo__barra {
+  height: 100%;
+  width: 100%;
+  background: var(--c-success);
+  border-radius: 999px;
+  transition: width .1s linear, background-color .2s;
+}
+
+/* Estados del temporizador */
+.cs-tiempo--aviso .cs-tiempo__barra {
+  background: var(--c-warning);
+}
+.cs-tiempo--peligro .cs-tiempo__barra {
+  background: var(--c-error);
+  animation: cs-pulso-peligro 0.6s ease-in-out infinite;
+}
+
+@keyframes cs-pulso-peligro {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .5; }
+}
+
+.cs-pregunta__tiempo-texto {
+  font-family: var(--font-mono);
+  font-size: .85rem;
+  color: var(--text-soft);
+  font-variant-numeric: tabular-nums;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* ---------- Enunciado ---------- */
+.cs-pregunta__enunciado {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--text-strong);
+}
+
+/* ---------- Opciones ---------- */
+.cs-pregunta__opciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.cs-opcion {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: .95rem;
+  text-align: left;
+  color: var(--text-strong);
+  transition: border-color .12s, background-color .12s, transform .08s;
+  min-height: 52px;
+}
+
+.cs-opcion:hover:not(:disabled) {
+  border-color: var(--brand);
+  background: var(--bg-alt);
+}
+
+.cs-opcion:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.cs-opcion:disabled {
+  cursor: default;
+}
+
+.cs-opcion__letra {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: var(--bg-alt);
+  color: var(--text-soft);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: .82rem;
+}
+
+.cs-opcion__texto {
+  flex: 1 1 auto;
+}
+
+/* Estados de la opción tras responder */
+.cs-opcion--correcta {
+  border-color: var(--c-success);
+  background: color-mix(in srgb, var(--c-success) 12%, var(--bg-surface));
+}
+.cs-opcion--correcta .cs-opcion__letra {
+  background: var(--c-success);
+  color: #ffffff;
+}
+
+.cs-opcion--incorrecta {
+  border-color: var(--c-error);
+  background: color-mix(in srgb, var(--c-error) 12%, var(--bg-surface));
+}
+.cs-opcion--incorrecta .cs-opcion__letra {
+  background: var(--c-error);
+  color: #ffffff;
+}
+
+.cs-opcion--atenuada {
+  opacity: .55;
+}
+
+/* ---------- Explicación ---------- */
+.cs-pregunta__explicacion {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: .9rem;
+  line-height: 1.5;
+  animation: cs-fade-in .2s ease;
+}
+
+.cs-pregunta__explicacion[hidden] { display: none; }
+
+.cs-pregunta__explicacion--acierto {
+  background: color-mix(in srgb, var(--c-success) 10%, var(--bg-surface));
+  border-left: 3px solid var(--c-success);
+  color: var(--text);
+}
+
+.cs-pregunta__explicacion--fallo {
+  background: color-mix(in srgb, var(--c-error) 10%, var(--bg-surface));
+  border-left: 3px solid var(--c-error);
+  color: var(--text);
+}
+
+.cs-pregunta__explicacion strong {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: .85rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .cs-pregunta__opciones {
+    grid-template-columns: 1fr;
+  }
+  .cs-pregunta__enunciado {
+    font-size: .98rem;
+  }
+  .cs-pregunta__tiempo {
+    min-width: 130px;
+  }
+  .cs-tiempo {
+    width: 80px;
+  }
+}
+
+/* ---------- Acciones dentro del velo de pausa ---------- */
+.cs-arena__velo-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  justify-content: center;
+}
+
+/* ---------- Pantalla de fin de partida ---------- */
+.cs-fin {
+  padding: var(--space-6) var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.cs-fin__header {
+  text-align: center;
+  padding-bottom: var(--space-4);
+  border-bottom: 2px solid var(--border);
+}
+
+.cs-fin__etiqueta {
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--c-error);
+  margin: 0 0 var(--space-2);
+}
+
+.cs-fin__titulo {
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  color: var(--text-strong);
+  margin: 0;
+}
+
+.cs-fin__resumen {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.cs-fin__tile {
+  padding: var(--space-4);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.cs-fin__tile--principal {
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--brand) 12%, var(--bg-alt)),
+      var(--bg-alt));
+  border-color: color-mix(in srgb, var(--brand) 35%, var(--border));
+}
+
+.cs-fin__tile-label {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-muted);
+}
+
+.cs-fin__tile-valor {
+  font-family: var(--font-mono);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 800;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.cs-fin__tile--principal .cs-fin__tile-valor {
+  color: var(--brand-strong);
+}
+
+.cs-fin__detalles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--bg-alt);
+  border-radius: var(--radius-md);
+}
+
+.cs-fin__detalle {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cs-fin__detalle-label {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-muted);
+}
+
+.cs-fin__detalle-valor {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.cs-fin__detalle-valor--ok    { color: var(--c-success); }
+.cs-fin__detalle-valor--ko    { color: var(--c-error); }
+.cs-fin__detalle-valor--racha { color: var(--c-current); }
+
+.cs-fin__mensaje {
+  text-align: center;
+  color: var(--text-soft);
+  font-size: 1rem;
+  margin: 0;
+  padding: var(--space-3);
+  background: color-mix(in srgb, var(--brand) 5%, var(--bg-surface));
+  border-left: 4px solid var(--brand);
+  border-radius: var(--radius-sm);
+}
+
+.cs-fin__acciones {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .cs-fin {
+    padding: var(--space-4);
+  }
+  .cs-fin__resumen {
+    grid-template-columns: 1fr;
+  }
+  .cs-fin__acciones {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cs-fin__acciones .btn {
+    justify-content: center;
+  }
+}
+
+/* ---------- Capas internas de la arena ---------- */
+.cs-arena__capa {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cs-arena__capa--efectos {
+  overflow: hidden;
+}
+
+/* ---------- Personaje ---------- */
+.cs-personaje {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  transform: translate(-50%, -50%);
+  transition: filter .15s ease;
+  z-index: 5;
+}
+
+.cs-personaje__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 0 6px var(--cs-acento));
+}
+
+.cs-personaje--golpeado {
+  animation: cs-sacudida .28s ease;
+}
+
+@keyframes cs-sacudida {
+  0%   { transform: translate(-50%, -50%) translateX(0); }
+  25%  { transform: translate(-50%, -50%) translateX(-6px); }
+  50%  { transform: translate(-50%, -50%) translateX(6px); }
+  75%  { transform: translate(-50%, -50%) translateX(-4px); }
+  100% { transform: translate(-50%, -50%) translateX(0); }
+}
+
+/* Aura del personaje */
+.cs-personaje__aura {
+  animation: cs-aura-pulso 2.2s ease-in-out infinite;
+}
+
+@keyframes cs-aura-pulso {
+  0%, 100% { opacity: .35; }
+  50%      { opacity: .75; }
+}
+
+/* ---------- Enemigos ---------- */
+.cs-enemigo {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  filter: drop-shadow(0 0 4px rgba(124, 58, 237, .55));
+  transition: filter .15s ease;
+}
+
+.cs-enemigo:hover {
+  filter: drop-shadow(0 0 8px rgba(124, 58, 237, .9));
+}
+
+.cs-enemigo__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cs-enemigo--golpeado {
+  animation: cs-enemigo-golpe .35s ease forwards;
+}
+
+@keyframes cs-enemigo-golpe {
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  40%  { opacity: 1; transform: translate(-50%, -50%) scale(1.3) rotate(10deg); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5) rotate(-15deg); }
+}
+
+/* ---------- Efectos ---------- */
+.cs-descarga {
+  position: absolute;
+  pointer-events: none;
+  z-index: 6;
+  transform-origin: 0 50%;
+  animation: cs-descarga-fade .28s ease-out forwards;
+}
+
+@keyframes cs-descarga-fade {
+  0%   { opacity: 1; filter: drop-shadow(0 0 8px var(--brand)); }
+  100% { opacity: 0; filter: drop-shadow(0 0 2px var(--brand)); }
+}
+
+.cs-flotante {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  pointer-events: none;
+  z-index: 7;
+  animation: cs-flotante-subir 1s ease-out forwards;
+  white-space: nowrap;
+}
+
+.cs-flotante--puntos { color: var(--cs-exito); }
+.cs-flotante--dano   { color: var(--cs-peligro); }
+
+@keyframes cs-flotante-subir {
+  0%   { opacity: 0; transform: translate(-50%, 0) scale(0.8); }
+  20%  { opacity: 1; transform: translate(-50%, -10px) scale(1.05); }
+  100% { opacity: 0; transform: translate(-50%, -50px) scale(1); }
+}
+
+.cs-impacto {
+  position: absolute;
+  pointer-events: none;
+  z-index: 6;
+  border-radius: 50%;
+  border: 3px solid var(--cs-peligro);
+  transform: translate(-50%, -50%);
+  animation: cs-impacto-expandir .5s ease-out forwards;
+}
+
+@keyframes cs-impacto-expandir {
+  0%   { width: 20px; height: 20px; opacity: 1; }
+  100% { width: 90px; height: 90px; opacity: 0; }
+}
+
+/* ---------- Veladuras de pausa y fin ---------- */
+.cs-arena__velo {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 18, 32, .82);
+  backdrop-filter: blur(3px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  z-index: 20;
+  text-align: center;
+  padding: var(--space-4);
+  color: #eef2f8;
+}
+
+.cs-arena__velo[hidden] { display: none; }
+
+.cs-arena__velo-texto {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #eef2f8;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.cs-arena__velo-subtexto {
+  color: #a7b3c7;
+  font-family: var(--font-mono);
+  font-size: .85rem;
+  margin: 0;
+}
+
+.cs-arena__velo--fin {
+  background: rgba(11, 18, 32, .9);
+}
+
+.cs-arena__velo--fin .cs-arena__velo-texto {
+  color: var(--cs-peligro);
+}
+
+/* ---------- Panel de racha en el HUD ---------- */
+.cs-hud__item--racha {
+  min-width: 130px;
+}
+
+.cs-racha {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.cs-racha__icono {
+  font-size: 1rem;
+  line-height: 1;
+  filter: grayscale(0.9);
+  transition: filter .2s, transform .2s;
+}
+
+.cs-racha--activa .cs-racha__icono {
+  filter: grayscale(0) drop-shadow(0 0 4px var(--c-current));
+  transform: scale(1.1);
+}
+
+.cs-racha__valor {
+  min-width: 20px;
+  color: var(--c-current);
+}
+
+.cs-racha__barra {
+  flex: 1 1 auto;
+  height: 6px;
+  background: var(--bg-alt);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  min-width: 60px;
+}
+
+.cs-racha__barra-relleno {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--c-current), var(--c-power));
+  border-radius: 999px;
+  transition: width .25s ease;
+}
+
+.cs-racha--max .cs-racha__barra-relleno {
+  background: linear-gradient(90deg, var(--c-power), var(--c-current));
+  animation: cs-racha-brillo .8s ease-in-out infinite;
+}
+
+@keyframes cs-racha-brillo {
+  0%, 100% { filter: brightness(1); }
+  50%      { filter: brightness(1.5); }
+}
+
+/* ---------- Velo de oleada (transición) ---------- */
+.cs-velo-oleada {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 18, 32, .88);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 25;
+  text-align: center;
+  padding: var(--space-4);
+  animation: cs-oleada-entrada .35s ease;
+  color: #eef2f8;
+}
+
+.cs-velo-oleada[hidden] { display: none; }
+
+@keyframes cs-oleada-entrada {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.cs-velo-oleada__etiqueta {
+  font-family: var(--font-mono);
+  font-size: .85rem;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--brand);
+  margin: 0 0 var(--space-2);
+}
+
+.cs-velo-oleada__numero {
+  font-family: var(--font-mono);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 800;
+  color: var(--brand);
+  line-height: 1;
+  margin: 0;
+  text-shadow: 0 0 20px color-mix(in srgb, var(--brand) 60%, transparent);
+  letter-spacing: -0.02em;
+}
+
+.cs-velo-oleada__sub {
+  color: var(--text-muted);
+  font-size: .95rem;
+  margin: var(--space-4) 0 0;
+  max-width: 40ch;
+}
+
+/* ---------- Destello de oleada en la arena ---------- */
+.cs-destello-oleada {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%,
+    color-mix(in srgb, var(--brand) 40%, transparent) 0%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 18;
+  animation: cs-destello 1s ease-out forwards;
+}
+
+@keyframes cs-destello {
+  0%   { opacity: 0; transform: scale(0.8); }
+  30%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.15); }
+}
+
+/* ---------- Aviso de ataque especial ---------- */
+.cs-aviso-especial {
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  color: var(--c-power);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--c-power) 80%, transparent);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 22;
+  animation: cs-especial-entrada 1.4s ease-out forwards;
+  white-space: nowrap;
+}
+
+@keyframes cs-especial-entrada {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+  20%  { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+  60%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* ---------- Efecto de descarga múltiple (ataque especial) ---------- */
+.cs-descarga-multiple {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 19;
+  animation: cs-descarga-multiple-fade 1.2s ease-out forwards;
+  background: radial-gradient(circle at 50% 50%,
+    color-mix(in srgb, var(--brand) 25%, transparent) 0%,
+    transparent 60%);
+}
+
+@keyframes cs-descarga-multiple-fade {
+  0%   { opacity: 0; }
+  15%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .cs-hud__item--racha {
+    min-width: 100%;
+  }
+  .cs-racha__barra {
+    min-width: 40px;
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 720px) {
+  .cs-inicio__hero {
+    flex-direction: column;
+    text-align: center;
+  }
+  .cs-inicio__reglas {
+    padding: var(--space-4);
+  }
+  .cs-hud {
+    gap: var(--space-3);
+    padding: var(--space-3);
+  }
+  .cs-hud__item {
+    min-width: 70px;
+  }
+  .cs-hud__acciones {
+    width: 100%;
+    margin-left: 0;
+    justify-content: flex-end;
+  }
+  .cs-arena {
+    min-height: 240px;
+  }
+}
+
+/* ---------- Animación de entrada de enemigos ---------- */
+.cs-enemigo {
+  animation: cs-enemigo-pop .28s ease-out;
+}
+
+@keyframes cs-enemigo-pop {
+  0%   { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+  70%  { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* ---------- Personaje con vida baja: aura roja pulsante ---------- */
+.cs-root--vida-baja .cs-personaje__svg {
+  filter: drop-shadow(0 0 10px var(--c-error));
+  animation: cs-personaje-peligro 1.2s ease-in-out infinite;
+}
+
+@keyframes cs-personaje-peligro {
+  0%, 100% { filter: drop-shadow(0 0 6px var(--c-error)); }
+  50%      { filter: drop-shadow(0 0 16px var(--c-error)); }
+}
+
+/* ---------- Barra de tiempo con degradado ---------- */
+.cs-tiempo__barra {
+  background: linear-gradient(90deg,
+    var(--c-error) 0%,
+    var(--c-warning) 40%,
+    var(--c-success) 100%);
+  background-size: 200% 100%;
+  background-position: right center;
+  transition: width .1s linear, background-position .3s ease;
+}
+
+/* Cuando queda menos, movemos el fondo hacia la izquierda (más rojo) */
+.cs-tiempo--aviso .cs-tiempo__barra {
+  background: linear-gradient(90deg, var(--c-error), var(--c-warning));
+}
+.cs-tiempo--peligro .cs-tiempo__barra {
+  background: var(--c-error);
+}
+
+/* ---------- Flash del HUD al cambiar puntuación ---------- */
+.cs-hud__valor.cs-flash {
+  animation: cs-hud-flash .35s ease;
+}
+
+@keyframes cs-hud-flash {
+  0%   { color: var(--brand); transform: scale(1.15); }
+  100% { color: var(--text-strong); transform: scale(1); }
+}
+
+/* ---------- Microinteracción en las opciones ---------- */
+.cs-opcion:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Foco visible reforzado */
+.cs-opcion:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+  border-color: var(--brand);
+}
+
+.cs-btn-grande:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* ---------- Aviso de atajos de teclado ---------- */
+.cs-atajos {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-2);
+}
+
+.cs-atajos kbd {
+  display: inline-block;
+  padding: 1px 5px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: .75rem;
+  color: var(--text-strong);
+}
+
+/* Ocultar el aviso en móvil */
+@media (max-width: 720px) {
+  .cs-atajos { display: none; }
+}
+
+/* ---------- Reducción de movimiento para accesibilidad ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .cs-enemigo,
+  .cs-svg-aura,
+  .cs-personaje__aura,
+  .cs-racha--max .cs-racha__barra-relleno,
+  .cs-tiempo--peligro .cs-tiempo__barra,
+  .cs-hud__valor.cs-flash {
+    animation: none !important;
+  }
+  .cs-pantalla {
+    animation: none !important;
+  }
+  .cs-flotante {
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Contraste reforzado en velos ---------- */
+.cs-arena__velo,
+.cs-velo-oleada {
+  color: #f8fafc;
+}
+
+.cs-arena__velo-subtexto,
+.cs-velo-oleada__sub {
+  color: #cbd5e1;
 }

@@ -174,25 +174,25 @@
           explicacion: "Rp_eq = 1/(1/6 + 1/3) = 2 Ω. R_eq = Rs + Rp_eq = 2 + 2 = 4 Ω."
         },
         {
-          enunciado: "En el circuito anterior con fuente de 12 V, ¿cuál es la corriente total?",
+          enunciado: "Un circuito tiene una fuente de 12 V, Rs = 2 Ω en serie con el paralelo de Rp1 = 6 Ω y Rp2 = 3 Ω (R_eq total = 4 Ω). ¿Cuál es la corriente total?",
           opciones: ["2 A", "3 A", "4 A", "6 A"],
           correcta: 1,
           explicacion: "I_total = V / R_eq = 12 / 4 = 3 A."
         },
         {
-          enunciado: "En ese mismo circuito, ¿qué voltaje cae en Rs?",
+          enunciado: "En un circuito serie-paralelo con 12 V, Rs = 2 Ω y R_eq total = 4 Ω, la corriente total es 3 A. ¿Qué voltaje cae en Rs?",
           opciones: ["4 V", "6 V", "8 V", "12 V"],
           correcta: 1,
           explicacion: "V_Rs = I_total × Rs = 3 × 2 = 6 V. El resto (6 V) cae en el bloque en paralelo."
         },
         {
-          enunciado: "Con esos mismos datos, ¿qué corriente circula por Rp1 (6 Ω)?",
+          enunciado: "En un circuito con 12 V, Rs = 2 Ω en serie con el paralelo de Rp1 = 6 Ω y Rp2 = 3 Ω, el voltaje en el bloque en paralelo es 6 V. ¿Qué corriente circula por Rp1 (6 Ω)",
           opciones: ["0.5 A", "1 A", "2 A", "3 A"],
           correcta: 1,
           explicacion: "El voltaje en el paralelo es 6 V. I_Rp1 = 6 / 6 = 1 A. I_Rp2 = 6 / 3 = 2 A. Suma = 3 A ✔."
         },
         {
-          enunciado: "¿Cuál es la potencia total disipada por el circuito del ejemplo?",
+          enunciado: "Un circuito serie-paralelo se alimenta con 12 V y consume una corriente total de 3 A. ¿Cuál es la potencia total del circuito?",
           opciones: ["12 W", "24 W", "36 W", "48 W"],
           correcta: 2,
           explicacion: "P_total = V × I_total = 12 × 3 = 36 W. También: P_Rs + P_Rp1 + P_Rp2 = 18 + 6 + 12 = 36 W ✔."
