@@ -1,10 +1,3 @@
-/* =========================================================
-   CircuitLab — preguntas.js
-   Fase 9: banco de preguntas para los desafíos
-   Cada categoría tiene 5 preguntas. Cada pregunta tiene 4 opciones.
-   La respuesta correcta está marcada con "correcta" (índice 0-3).
-   ========================================================= */
-
 (function () {
   "use strict";
 
@@ -12,9 +5,7 @@
 
   window.CircuitLab.categorias = [
 
-    /* ============================================================
-       CATEGORÍA 1 — Conceptos básicos
-       ============================================================ */
+    /* CATEGORÍA 1 — Conceptos básicos */
     {
       id: "conceptos",
       titulo: "Conceptos básicos",
@@ -53,9 +44,7 @@
       ]
     },
 
-    /* ============================================================
-       CATEGORÍA 2 — Ley de Ohm
-       ============================================================ */
+    /* CATEGORÍA 2 — Ley de Ohm */
     {
       id: "ley-ohm",
       titulo: "Ley de Ohm",
@@ -94,9 +83,7 @@
       ]
     },
 
-    /* ============================================================
-       CATEGORÍA 3 — Potencia
-       ============================================================ */
+    /* CATEGORÍA 3 — Potencia */
     {
       id: "potencia",
       titulo: "Potencia eléctrica",
@@ -135,9 +122,7 @@
       ]
     },
 
-    /* ============================================================
-       CATEGORÍA 4 — Serie y paralelo
-       ============================================================ */
+    /* CATEGORÍA 4 — Serie y paralelo */
     {
       id: "serie-paralelo",
       titulo: "Serie y paralelo",
@@ -176,9 +161,7 @@
       ]
     },
 
-    /* ============================================================
-       CATEGORÍA 5 — Circuitos mixtos
-       ============================================================ */
+    /* CATEGORÍA 5 — Circuitos mixtos */
     {
       id: "mixtos",
       titulo: "Circuitos mixtos",
@@ -217,9 +200,7 @@
       ]
     },
 
-    /* ============================================================
-       CATEGORÍA 6 — Leyes de Kirchhoff
-       ============================================================ */
+    /* CATEGORÍA 6 — Leyes de Kirchhoff */
     {
       id: "kirchhoff",
       titulo: "Leyes de Kirchhoff",
@@ -260,5 +241,4 @@
 
   ];
 
-  console.log("CircuitLab · preguntas.js cargado (Fase 9).");
 })();

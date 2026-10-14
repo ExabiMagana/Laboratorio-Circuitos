@@ -1,19 +1,7 @@
-/* =========================================================
-   CircuitLab — diagramas.js
-   Fase 6: diagramas SVG mejorados
-   - Sentido de corriente (flechas naranjas)
-   - Polaridad de voltaje (signos + y − azules)
-   - Etiquetas de nodos
-   - Función nueva: resistencias (para la calculadora de R_eq)
-   Sin dependencias externas.
-   ========================================================= */
-
 (function () {
   "use strict";
 
-  /* =========================================================
-     Constantes de dibujo
-     ========================================================= */
+  /* Constantes de dibujo */
   const MARGIN   = 24;
   const UNIT     = 70;
   const ROW_H    = 120;
@@ -23,9 +11,7 @@
   const BAT_H    = 44;
   const ARROW_SZ = 7;
 
-  /* =========================================================
-     Utilidades
-     ========================================================= */
+  /* Utilidades */
   function esc(s) {
     return String(s)
       .replace(/&/g, "&amp;")
@@ -42,18 +28,14 @@
     return `${fmtNum(v)}${u ? " " + u : ""}`;
   }
 
-  /* =========================================================
-     Símbolos
-     ========================================================= */
+  /* Símbolos */
 
-  /** Resistor horizontal (zigzag) centrado en (x, y). */
   function resistor(x, y, etiqueta, valor) {
     const w = RES_W;
     const h = RES_H;
     const x1 = x - w / 2;
     const y1 = y - h / 2;
 
-    // Zigzag de 6 tramos
     const seg = w / 6;
     const pts = [
       [x1, y],
@@ -76,7 +58,6 @@
     `;
   }
 
-  /** Batería vertical centrada en (x, y). */
   function bateria(x, y, etiqueta) {
     return `
       <line class="battery" x1="${x - BAT_W / 2}" y1="${y}" x2="${x + BAT_W / 2}" y2="${y}" />
@@ -87,7 +68,6 @@
     `;
   }
 
-  /** Nodo (punto relleno). */
   function nodo(x, y, etiqueta) {
     const label = etiqueta
       ? `<text class="label" x="${x + 8}" y="${y - 8}">${esc(etiqueta)}</text>`
@@ -95,7 +75,6 @@
     return `<circle class="node" cx="${x}" cy="${y}" r="4" />${label}`;
   }
 
-  /** Flecha de corriente horizontal en (x, y), hacia la derecha. */
   function flechaCorrienteH(x, y, etiqueta) {
     const w = 32;
     return `
@@ -108,7 +87,6 @@
     `;
   }
 
-  /** Flecha de corriente vertical en (x, y), hacia arriba (dy=-1) o abajo (dy=1). */
   function flechaCorrienteV(x, y, dir, etiqueta) {
     const h = 30;
     const y2 = y + dir * h / 2;
@@ -125,7 +103,6 @@
     `;
   }
 
-  /** Marcas de voltaje sobre una resistencia: + a la izquierda, − a la derecha. */
   function marcaVoltajeH(x, y, valor) {
     const dx = RES_W / 2 + 14;
     return `
@@ -137,9 +114,7 @@
     `;
   }
 
-  /* =========================================================
-     SERIE
-     ========================================================= */
+  /* SERIE  */
   function serie(data) {
     const n = data.componentes.length;
     const ancho = MARGIN * 2 + UNIT * (n + 2);
@@ -154,14 +129,14 @@
 
     const partes = [];
 
-    // Marco del diagrama (opcional, muy sutil, para que los cables tengan recorrido)
+    // Marco del diagrama
     partes.push(`<rect class="frame" x="0.5" y="0.5" width="${ancho - 1}" height="${alto - 1}" />`);
 
     // Cables superior e inferior
     partes.push(`<line class="wire" x1="${batX}" y1="${yTop}" x2="${ancho - MARGIN}" y2="${yTop}" />`);
     partes.push(`<line class="wire" x1="${batX}" y1="${yBot}" x2="${ancho - MARGIN}" y2="${yBot}" />`);
 
-    // Batería (conexión vertical)
+    // Batería
     partes.push(`<line class="wire" x1="${batX}" y1="${yTop}" x2="${batX}" y2="${batY - BAT_H / 2}" />`);
     partes.push(`<line class="wire" x1="${batX}" y1="${yBot}" x2="${batX}" y2="${batY + BAT_H / 2}" />`);
     partes.push(bateria(batX, batY, `${fmt(data.fuente, "V")}`));
@@ -175,7 +150,7 @@
       partes.push(marcaVoltajeH(x, yMid, `V = ${fmt(c.V, "V")}`));
     });
 
-    // Nodos en las esquinas (A y B)
+    // Nodos en las esquinas
     partes.push(nodo(batX, yTop, "A"));
     partes.push(nodo(ancho - MARGIN, yTop, "B"));
 
@@ -183,7 +158,7 @@
     const xFlecha = batX + UNIT * 0.5;
     partes.push(flechaCorrienteH(xFlecha, yTop, `I = ${fmt(data.Itotal, "A")}`));
 
-    // Flecha de corriente en el cable inferior (apunta al revés)
+    // Flecha de corriente en el cable inferior
     partes.push(`
       <g class="current-arrow">
         <line class="current" x1="${ancho - MARGIN - 30}" y1="${yBot}" x2="${batX + 30}" y2="${yBot}" />
@@ -198,9 +173,7 @@
     </svg>`;
   }
 
-  /* =========================================================
-     PARALELO
-     ========================================================= */
+  /* PARALELO */
   function paralelo(data) {
     const n = data.componentes.length;
     const rowH = 80;
@@ -218,13 +191,13 @@
     const partes = [];
     partes.push(`<rect class="frame" x="0.5" y="0.5" width="${ancho - 1}" height="${alto - 1}" />`);
 
-    // Barra superior e inferior (nodos A y B)
+    // Barra superior e inferior
     partes.push(`<line class="wire" x1="${xLeft}" y1="${yFirst}" x2="${xLeft}" y2="${yLast}" />`);
     partes.push(`<line class="wire" x1="${xRight}" y1="${yFirst}" x2="${xRight}" y2="${yLast}" />`);
     partes.push(nodo(xLeft, yFirst, "A"));
     partes.push(nodo(xRight, yFirst, "B"));
 
-    // Batería (izquierda)
+    // Batería
     const yBat = (yFirst + yLast) / 2;
     partes.push(`<line class="wire" x1="${xBat}" y1="${yFirst}" x2="${xLeft}" y2="${yFirst}" />`);
     partes.push(`<line class="wire" x1="${xBat}" y1="${yLast}" x2="${xLeft}" y2="${yLast}" />`);
@@ -245,7 +218,7 @@
       const xFlecha = xLeft + (xRes - RES_W / 2 - xLeft) / 2;
       partes.push(flechaCorrienteH(xFlecha, y, `I=${fmt(c.I, "A")}`));
 
-      // Valor de voltaje (a la derecha)
+      // Valor de voltaje
       partes.push(`<text class="label-voltage" x="${xRight + 6}" y="${y + 4}">${fmt(c.V, "V")}</text>`);
     });
 
@@ -255,9 +228,7 @@
     </svg>`;
   }
 
-  /* =========================================================
-     MIXTO t1: Rs + (Rp1 || Rp2)
-     ========================================================= */
+  /* MIXTO t1: Rs + (Rp1 || Rp2) */
   function mixtoT1(data) {
     const ancho = 520;
     const alto  = 240;
@@ -279,7 +250,7 @@
     partes.push(`<line class="wire" x1="${xBat}" y1="${yMid - BAT_H / 2}" x2="${xBat}" y2="${yTop}" />`);
     partes.push(`<line class="wire" x1="${xBat}" y1="${yTop}" x2="${xRs - RES_W / 2}" y2="${yTop}" />`);
 
-    // Rama de Rs (por arriba)
+    // Rama de Rs
     partes.push(resistor(xRs, yTop, "Rs", `${fmt(data.componentes[0].R, "Ω")}`));
     partes.push(`<line class="wire" x1="${xRs + RES_W / 2}" y1="${yTop}" x2="${xRp1 - RES_W / 2}" y2="${yTop}" />`);
 
@@ -290,12 +261,12 @@
     partes.push(`<line class="wire" x1="${xSplit}" y1="${yMid + 30}" x2="${xSplit}" y2="${yBot}" />`);
     partes.push(nodo(xSplit, yMid));
 
-    // Rama Rp1 (arriba, en realidad al mismo nivel que Rs, separada por la bif.)
+    // Rama Rp1
     partes.push(`<line class="wire" x1="${xSplit}" y1="${yTop}" x2="${xRp1 - RES_W / 2}" y2="${yTop}" />`);
     partes.push(resistor(xRp1, yTop, "Rp1", `${fmt(data.componentes[1].R, "Ω")}`));
     partes.push(`<line class="wire" x1="${xRp1 + RES_W / 2}" y1="${yTop}" x2="${xEnd}" y2="${yTop}" />`);
 
-    // Rama Rp2 (por abajo)
+    // Rama Rp2
     partes.push(`<line class="wire" x1="${xSplit}" y1="${yBot}" x2="${xRp2 - RES_W / 2}" y2="${yBot}" />`);
     partes.push(resistor(xRp2, yBot, "Rp2", `${fmt(data.componentes[2].R, "Ω")}`));
     partes.push(`<line class="wire" x1="${xRp2 + RES_W / 2}" y1="${yBot}" x2="${xEnd}" y2="${yBot}" />`);
@@ -328,9 +299,7 @@
     </svg>`;
   }
 
-  /* =========================================================
-     MIXTO t2: R1 + (R2 || R3) — misma forma que t1 con otras etiquetas
-     ========================================================= */
+  /* MIXTO t2: R1 + (R2 || R3) — misma forma que t1 con otras etiquetas */
   function mixtoT2(data) {
     let svg = mixtoT1(data);
     svg = svg.replace(">Rs<", ">R1<").replace(">Rp1<", ">R2<").replace(">Rp2<", ">R3<");
@@ -338,9 +307,7 @@
     return svg;
   }
 
-  /* =========================================================
-     MIXTO t3: (R1 || R2) + (R3 || R4)
-     ========================================================= */
+  /* MIXTO t3: (R1 || R2) + (R3 || R4) */
   function mixtoT3(data) {
     const ancho = 580;
     const alto  = 260;
@@ -411,9 +378,7 @@
     </svg>`;
   }
 
-  /* =========================================================
-     Despachador mixto
-     ========================================================= */
+  /* Despachador mixto */
   function mixto(data) {
     switch (data.tipo) {
       case "mixto-t1": return mixtoT1(data);
@@ -423,13 +388,6 @@
     }
   }
 
-  /* =========================================================
-     NUEVO — Diagrama para la calculadora de R equivalente
-     Muestra las resistencias conectadas en serie o en paralelo.
-     @param {"serie"|"paralelo"} tipo
-     @param {number[]} valores
-     @param {number} req
-     ========================================================= */
   function resistencias(tipo, valores, req) {
     if (tipo === "serie") return resistenciaSerieSVG(valores, req);
     if (tipo === "paralelo") return resistenciaParaleloSVG(valores, req);
@@ -499,13 +457,8 @@
     </svg>`;
   }
 
-    /* =========================================================
-     DIAGRAMA DE NODO (KCL)
-     ========================================================= */
-  /**
-   * @param {object} data  { entrantes:[], salientes:[] }
-   * Las flechas entrantes apuntan al nodo central; las salientes, hacia fuera.
-   */
+  /* DIAGRAMA DE NODO (KCL) */
+
   function nodoKCL(data) {
     const cx = 260;
     const cy = 140;
@@ -519,7 +472,7 @@
     partes.push(`<circle class="node" cx="${cx}" cy="${cy}" r="${radio}" />`);
     partes.push(`<text class="label" x="${cx}" y="${cy + 5}" text-anchor="middle">N</text>`);
 
-    // Entrantes (vienen de la izquierda y de arriba)
+    // Entrantes
     const posicionesEntrantes = [
       { x: cx - largoFlecha - 60, y: cy, dir: "right" },
       { x: cx, y: cy - largoFlecha - 50, dir: "down" }
@@ -540,7 +493,7 @@
       }
     });
 
-    // Salientes (van a la derecha y abajo)
+    // Salientes
     const posicionesSalientes = [
       { x: cx + largoFlecha + 60, y: cy, dir: "right" },
       { x: cx, y: cy + largoFlecha + 50, dir: "down" }
@@ -567,13 +520,8 @@
     </svg>`;
   }
 
-  /* =========================================================
-     DIAGRAMA DE MALLA (KVL)
-     ========================================================= */
-  /**
-   * @param {object} data { voltajes:[{etiqueta, valor}] }
-   * Dibuja un rectángulo con la batería arriba y las caídas marcadas sobre el camino.
-   */
+  /* DIAGRAMA DE MALLA (KVL) */
+
   function mallaKVL(data) {
     const ancho = 460;
     const alto = 240;
@@ -600,7 +548,7 @@
     `);
     partes.push(`<text class="label-current" x="${cxf}" y="${cyf - 12}" text-anchor="middle">sentido horario</text>`);
 
-    // Batería arriba (asumimos que el primer voltaje es la fuente)
+    // Batería arriba
     if (data.voltajes[0]) {
       partes.push(bateria((x1 + x2) / 2, y1 - 2, `${fmtNum(data.voltajes[0].valor)} V`));
     }
@@ -630,9 +578,7 @@
     </svg>`;
   }
 
-  /* =========================================================
-     Exportación
-     ========================================================= */
+  /* Exportación */
   window.CircuitLab = window.CircuitLab || {};
     window.CircuitLab.diagramas = {
     serie,
@@ -642,7 +588,5 @@
     nodoKCL,
     mallaKVL
   };
-
-  console.log("CircuitLab · diagramas.js cargado (Fase 7).");
 
 })();

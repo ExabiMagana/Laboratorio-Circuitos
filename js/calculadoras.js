@@ -1,9 +1,3 @@
-/* =========================================================
-   CircuitLab — calculadoras.js
-   Fase 4: lógica de UI para las tres calculadoras
-   Consume window.CircuitLab.calculos (Fase 3)
-   ========================================================= */
-
 (function () {
   "use strict";
 
@@ -14,11 +8,7 @@
     return;
   }
 
-  /* =========================================================
-     Utilidades de UI
-     ========================================================= */
-
-  /** Muestra un mensaje de error en el contenedor de resultado. */
+  /* Utilidades de UI */
   function renderError(container, mensaje) {
     container.innerHTML = `
       <div class="alert alert--error">
@@ -28,7 +18,6 @@
     `;
   }
 
-  /** Marca visualmente un campo como inválido. */
   function marcarInvalido(input, hint) {
     const field = input.closest(".field");
     if (!field) return;
@@ -37,7 +26,6 @@
     if (hintEl && hint) hintEl.textContent = hint;
   }
 
-  /** Limpia todos los estados de error de un panel. */
   function limpiarEstados(panel) {
     panel.querySelectorAll(".field--invalid").forEach((f) => f.classList.remove("field--invalid"));
     panel.querySelectorAll(".field__hint").forEach((h) => {
@@ -46,18 +34,12 @@
     });
   }
 
-  /** Guarda los hints originales para poder restaurarlos. */
   function guardarHints(panel) {
     panel.querySelectorAll(".field__hint").forEach((h) => {
       if (!h.dataset.original) h.dataset.original = h.textContent;
     });
   }
 
-  /**
-   * Lee el valor de un input como número.
-   * Devuelve { ok, valor, motivo }.
-   * Acepta coma decimal y espacios.
-   */
   function leerNumero(input) {
     const raw = (input.value || "").trim().replace(",", ".");
     if (raw === "") return { ok: false, valor: null, motivo: "Este campo es obligatorio." };
@@ -66,13 +48,11 @@
     return { ok: true, valor: n };
   }
 
-  /** Formatea un valor + unidad para mostrarlo. */
   function fmt(valor, unidad) {
     const r = C.round(valor, 4);
     return `<span class="result-card__value">${r}<span class="result-card__unit">${unidad}</span></span>`;
   }
 
-  /** Bloque reutilizable: fórmula + sustitución. */
   function bloqueFormula(formula, sustitucion) {
     return `
       <h4>Fórmula utilizada</h4>
@@ -82,9 +62,7 @@
     `;
   }
 
-  /* =========================================================
-     Pestañas
-     ========================================================= */
+  /* Pestañas */
   const tabs = document.querySelectorAll(".tab");
   const panels = document.querySelectorAll(".tab-panel");
 
@@ -107,9 +85,7 @@
     });
   });
 
-  /* =========================================================
-     Calculadora 1 — Ley de Ohm
-     ========================================================= */
+  /* Calculadora 1 — Ley de Ohm */
   const ohm = {
     target:   document.getElementById("ohm-target"),
     V:        document.getElementById("ohm-V"),
@@ -127,7 +103,6 @@
 
   guardarHints(ohm.panel);
 
-  // Muestra solo los campos que no son el objetivo
   function actualizarCamposOhm() {
     const t = ohm.target.value;
     ohm.fieldV.style.display = t === "V" ? "none" : "";
@@ -142,7 +117,6 @@
     limpiarEstados(ohm.panel);
     const target = ohm.target.value;
 
-    // Determinar qué campos leer
     const campos = [];
     if (target !== "V") campos.push({ input: ohm.V, key: "V" });
     if (target !== "I") campos.push({ input: ohm.I, key: "I" });
@@ -288,7 +262,6 @@
   }
 
   function comprobacionOhm(target, datos, valor) {
-    // Comprobamos con la fórmula independiente a la calculada
     switch (target) {
       case "V": {
         const esperado = datos.I * datos.R;
@@ -306,9 +279,7 @@
     return "";
   }
 
-  /* =========================================================
-     Calculadora 2 — Potencia
-     ========================================================= */
+  /* Calculadora 2 — Potencia */
   const pot = {
     V:        document.getElementById("pot-V"),
     I:        document.getElementById("pot-I"),
@@ -479,9 +450,7 @@
     return lineas.join("<br>") + `<br><em>Valor mostrado: ${valor} W.</em>`;
   }
 
-  /* =========================================================
-     Calculadora 3 — Resistencia equivalente
-     ========================================================= */
+  /* Calculadora 3 — Resistencia equivalente */
   const req = {
     tipo:     document.getElementById("req-tipo"),
     lista:    document.getElementById("req-lista"),
@@ -532,8 +501,6 @@
     });
   }
 
-  // Estado inicial: 3 resistencias de ejemplo (2, 4, 6) para que el usuario
-  // vea de inmediato cómo funciona con los valores de referencia del proyecto.
   crearFilaReq("2");
   crearFilaReq("4");
   crearFilaReq("6");
@@ -701,9 +668,4 @@
     return `En paralelo, la resistencia equivalente siempre es menor que la menor de las resistencias (${min} Ω).`;
   }
 
-  /* =========================================================
-     Inicialización
-     ========================================================= */
-
-    console.log("CircuitLab · calculadoras.js cargado (Fase 10).");
 })();

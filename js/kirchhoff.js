@@ -1,8 +1,3 @@
-/* =========================================================
-   CircuitLab — kirchhoff.js
-   Fase 7: UI del módulo de leyes de Kirchhoff
-   ========================================================= */
-
 (function () {
   "use strict";
 
@@ -13,9 +8,7 @@
     return;
   }
 
-  /* =========================================================
-     Utilidades
-     ========================================================= */
+  /* Utilidades */
   function leerNumero(input, permitirVacio) {
     const raw = (input.value || "").trim().replace(",", ".");
     if (raw === "") {
@@ -49,9 +42,7 @@
     });
   }
 
-  /* =========================================================
-     Pestañas
-     ========================================================= */
+  /* Pestañas */
   const tabs = document.querySelectorAll(".tab");
   const panels = document.querySelectorAll(".tab-panel");
 
@@ -72,9 +63,7 @@
     });
   });
 
-  /* =========================================================
-     Lista dinámica genérica (corrientes / voltajes)
-     ========================================================= */
+  /* Lista dinámica genérica */
   function crearGestorLista(contenedor, botonAgregar, prefijo, unidad, valoresIniciales) {
     let contador = 0;
 
@@ -144,9 +133,7 @@
     };
   }
 
-  /* =========================================================
-     KCL — Ley de corrientes
-     ========================================================= */
+  /* KCL — Ley de corrientes */
   const kcl = {
     modo:      document.getElementById("kcl-modo"),
     entrantes: document.getElementById("kcl-entrantes"),
@@ -175,7 +162,6 @@
       return;
     }
 
-    // Modo comprobar: todas deben ser números
     if (modo === "comprobar") {
       const todas = [...entra.valores, ...sale.valores];
       if (todas.some((v) => v == null)) {
@@ -207,7 +193,6 @@
       return;
     }
 
-    // Modo faltante: exactamente un null entre todos
     const todos = [...entra.valores, ...sale.valores];
     const nulos = todos.filter((v) => v == null).length;
     if (nulos !== 1) {
@@ -216,10 +201,8 @@
       return;
     }
 
-    // Identificar de qué lado está el vacío
     let resultado;
     if (entra.valores.includes(null)) {
-      // Falta una entrante: Σ entra = Σ sale → faltante = Σ sale - Σ otras entra
       const otras = entra.valores.filter((v) => v != null);
       const sumaSale = sale.valores.reduce((a, b) => a + b, 0);
       const sumaOtras = otras.reduce((a, b) => a + b, 0);
@@ -311,9 +294,7 @@
     );
   });
 
-  /* =========================================================
-     KVL — Ley de voltajes
-     ========================================================= */
+  /* KVL — Ley de voltajes */
   const kvl = {
     modo:     document.getElementById("kvl-modo"),
     lista:    document.getElementById("kvl-lista"),
@@ -367,7 +348,6 @@
       return;
     }
 
-    // Modo faltante
     const nulos = r.valores.filter((v) => v == null).length;
     if (nulos !== 1) {
       renderError(kvl.salida, "Deja exactamente un voltaje vacío para calcularlo.");
@@ -443,9 +423,7 @@
     );
   });
 
-  /* =========================================================
-     Mallas — dos mallas
-     ========================================================= */
+  /* Mallas — dos mallas */
   const mall = {
     V1:       document.getElementById("mall-V1"),
     V2:       document.getElementById("mall-V2"),
@@ -459,7 +437,7 @@
   };
 
   mall.calcular.addEventListener("click", () => {
-    // limpiar estilos
+
     [mall.V1, mall.V2, mall.R1, mall.R2, mall.R3].forEach((i) =>
       i.closest(".field").classList.remove("field--invalid"));
 
@@ -637,7 +615,6 @@
     const formulas = formulaEls.map((el) => ({ formula: el.textContent.trim(), sustitucion: "" }));
     const pasos = pasosEls.map((el) => el.textContent.trim());
 
-    // Tabla por componente -> reconstruimos desde la tabla del DOM
     const filasTabla = [...mall.salida.querySelectorAll(".data-table tbody tr")].map((tr) => {
       const tds = [...tr.querySelectorAll("td")].map((td) => td.textContent.trim());
       return `${tds[0]}: R=${tds[1]}, V=${tds[2]}, I=${tds[3]}, P=${tds[4]}`;
@@ -665,5 +642,4 @@
     );
   });
 
-  console.log("CircuitLab · kirchhoff.js cargado (Fase 10).");
 })();

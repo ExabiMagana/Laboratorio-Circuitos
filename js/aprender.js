@@ -1,9 +1,3 @@
-/* =========================================================
-   CircuitLab — aprender.js
-   Fase 8: renderiza el índice y las lecciones
-   Consume window.CircuitLab.lecciones
-   ========================================================= */
-
 (function () {
   "use strict";
 
@@ -16,9 +10,7 @@
   const navList = document.getElementById("lesson-nav-list");
   const content = document.getElementById("lesson-content");
 
-  /* =========================================================
-     Render del índice lateral
-     ========================================================= */
+  /* Render del índice lateral */
   function renderIndice() {
     navList.innerHTML = lecciones.map((l, i) => `
       <li>
@@ -33,9 +25,7 @@
     `).join("");
   }
 
-  /* =========================================================
-     Render de una lección
-     ========================================================= */
+  /* Render de una lección */
   function renderLeccion(l, numero) {
     const formulasHTML = (l.formulas || []).map((f) => `
       <div class="formula-block">
@@ -94,9 +84,7 @@
     content.innerHTML = lecciones.map((l, i) => renderLeccion(l, i + 1)).join("");
   }
 
-  /* =========================================================
-     Índice activo según scroll
-     ========================================================= */
+  /* Índice activo según scroll */
   function activarEnlace(id) {
     document.querySelectorAll(".lesson-nav__link").forEach((a) => {
       a.classList.toggle("is-active", a.dataset.lesson === id);
@@ -119,9 +107,7 @@
     articulos.forEach((a) => observer.observe(a));
   }
 
-  /* =========================================================
-     Navegación suave dentro de la página
-     ========================================================= */
+  /*Navegación suave dentro de la página */
   function suavizarAnclas() {
     document.querySelectorAll('a[href^="#"]').forEach((a) => {
       a.addEventListener("click", (e) => {
@@ -136,9 +122,7 @@
     });
   }
 
-  /* =========================================================
-     Inicialización
-     ========================================================= */
+  /* Inicialización */
   renderIndice();
   renderLecciones();
   suavizarAnclas();

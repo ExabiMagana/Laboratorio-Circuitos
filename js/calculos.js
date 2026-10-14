@@ -1,19 +1,10 @@
-/* =========================================================
-   CircuitLab — calculos.js
-   Fase 3: motor matemático (funciones puras)
-   Sin acceso al DOM. Sin dependencias externas.
-   ========================================================= */
-
 (function () {
   "use strict";
 
-  /* =========================================================
-     Utilidades internas
-     ========================================================= */
+  /* Utilidades internas */
 
   const EPS = 1e-9;
 
-  /** Redondea evitando -0. */
   function round(value, decimals = 6) {
     if (!Number.isFinite(value)) return value;
     const factor = Math.pow(10, decimals);
@@ -21,34 +12,21 @@
     return Object.is(r, -0) ? 0 : r;
   }
 
-  /** Comprueba que un valor es número finito. */
   function isFiniteNumber(v) {
     return typeof v === "number" && Number.isFinite(v);
   }
 
-  /** Comprueba que un valor es número finito estrictamente positivo. */
   function isPositive(v) {
     return isFiniteNumber(v) && v > 0;
   }
 
-  /** Lanza un error con código legible. */
   function fail(code, message) {
     const err = new Error(message || code);
     err.code = code;
     throw err;
   }
 
-  /* =========================================================
-     1. Ley de Ohm
-     V = I × R    I = V / R    R = V / I
-     ========================================================= */
-
-  /**
-   * Calcula la magnitud solicitada aplicando la Ley de Ohm.
-   * @param {"V"|"I"|"R"} target  Magnitud a calcular.
-   * @param {object} data         Datos de entrada { V?, I?, R? }.
-   * @returns {{ valor:number, unidad:string, formula:string, sustitucion:string }}
-   */
+  /* 1. Ley de Ohm */
   function leyDeOhm(target, data) {
     const { V, I, R } = data || {};
 
@@ -96,17 +74,7 @@
     }
   }
 
-  /* =========================================================
-     2. Potencia eléctrica
-     P = V × I    P = I² × R    P = V² / R
-     ========================================================= */
-
-  /**
-   * Calcula la potencia eligiendo la fórmula más adecuada según los datos.
-   * Prioridad: V×I  →  I²×R  →  V²/R
-   * @param {object} data { V?, I?, R? }
-   * @returns {{ valor:number, unidad:string, formula:string, sustitucion:string }}
-   */
+  /* 2. Potencia eléctrica */
   function potencia(data) {
     const { V, I, R } = data || {};
 
@@ -138,11 +106,7 @@
     fail("DATOS_INSUFICIENTES", "Se necesitan al menos dos magnitudes para calcular P.");
   }
 
-  /* =========================================================
-     3. Resistencia equivalente
-     ========================================================= */
-
-  /** Serie: R_eq = R1 + R2 + ... + Rn */
+  /* 3. Resistencia equivalente */
   function resistenciaSerie(resistencias) {
     if (!Array.isArray(resistencias) || resistencias.length === 0) {
       fail("SIN_RESISTENCIAS", "Debe haber al menos una resistencia.");
@@ -161,7 +125,6 @@
     };
   }
 
-  /** Paralelo: 1/R_eq = 1/R1 + 1/R2 + ... + 1/Rn */
   function resistenciaParalelo(resistencias) {
     if (!Array.isArray(resistencias) || resistencias.length === 0) {
       fail("SIN_RESISTENCIAS", "Debe haber al menos una resistencia.");
@@ -185,27 +148,18 @@
     };
   }
 
-  /** Despachador por tipo. */
   function resistenciaEquivalente(tipo, resistencias) {
     if (tipo === "serie")    return resistenciaSerie(resistencias);
     if (tipo === "paralelo") return resistenciaParalelo(resistencias);
     fail("TIPO_INVALIDO", `Tipo de conexión desconocido: ${tipo}`);
   }
 
-  /* =========================================================
-     4. Circuito en serie
-     ========================================================= */
-
-  /**
-   * Analiza un circuito en serie.
-   * @param {number} fuente  Voltaje de la fuente (V).
-   * @param {number[]} resistencias
-   */
+  /* 4. Circuito en serie */
   function circuitoSerie(fuente, resistencias) {
     if (!isPositive(fuente)) {
       fail("FUENTE_INVALIDA", "El voltaje de la fuente debe ser positivo.");
     }
-    const req = resistenciaSerie(resistencias); // valida resistencias
+    const req = resistenciaSerie(resistencias);
 
     const corriente = fuente / req.valor;
 
@@ -240,13 +194,7 @@
     };
   }
 
-  /* =========================================================
-     5. Circuito en paralelo
-     ========================================================= */
-
-  /**
-   * Analiza un circuito en paralelo (fuente única, varias ramas).
-   */
+  /* 5. Circuito en paralelo */
   function circuitoParalelo(fuente, resistencias) {
     if (!isPositive(fuente)) {
       fail("FUENTE_INVALIDA", "El voltaje de la fuente debe ser positivo.");
@@ -259,7 +207,7 @@
       return {
         nombre: `R${i + 1}`,
         R: round(r),
-        V: round(fuente),        // en paralelo todos los voltajes son iguales a la fuente
+        V: round(fuente),        
         I: round(corrienteRama),
         P: round(p)
       };
@@ -285,21 +233,7 @@
     };
   }
 
-  /* =========================================================
-     6. Circuito mixto prediseñado
-     Topología 1: Rs en serie con (Rp1 || Rp2)
-     Topología 2: R1 y R2 en serie, R3 en paralelo con R2
-     Topología 3: (R1 || R2) en serie con (R3 || R4)
-     ========================================================= */
-
-  /**
-   * @param {"t1"|"t2"|"t3"} topologia
-   * @param {number} fuente
-   * @param {number[]} resistencias  Valores según topología:
-   *   t1: [Rs, Rp1, Rp2]         → Rs + (Rp1 || Rp2)
-   *   t2: [R1, R2, R3]           → R1 + (R2 || R3)
-   *   t3: [R1, R2, R3, R4]       → (R1 || R2) + (R3 || R4)
-   */
+  /* 6. Circuito mixto prediseñado */
   function circuitoMixto(topologia, fuente, resistencias) {
     if (!isPositive(fuente)) {
       fail("FUENTE_INVALIDA", "El voltaje de la fuente debe ser positivo.");
@@ -452,16 +386,7 @@
     };
   }
 
-  /* =========================================================
-     7. Leyes de Kirchhoff
-     ========================================================= */
-
-  /**
-   * Primera ley: suma de corrientes entrantes = suma de salientes.
-   * @param {number[]} entrantes
-   * @param {number[]} salientes
-   * @returns {{ ecuacion:string, entra:number, sale:number, diferencia:number, cumple:boolean }}
-   */
+  /* 7. Leyes de Kirchhoff */
   function leyCorrientes(entrantes, salientes) {
     if (!Array.isArray(entrantes) || !Array.isArray(salientes)) {
       fail("ARGS_INVALIDOS", "Se esperan dos arreglos de corrientes.");
@@ -483,12 +408,6 @@
     };
   }
 
-  /**
-   * Calcula la corriente faltante dado que la suma entrante = suma saliente.
-   * @param {number[]} conocidas Lado conocido (entrantes o salientes).
-   * @param {number[]} otras     Lado parcialmente conocido.
-   * @returns {{ valor:number, unidad:string, ecuacion:string }}
-   */
   function corrienteFaltante(conocidas, otras) {
     if (!Array.isArray(conocidas) || !Array.isArray(otras)) {
       fail("ARGS_INVALIDOS", "Se esperan dos arreglos de corrientes.");
@@ -502,10 +421,6 @@
     };
   }
 
-  /**
-   * Segunda ley: en una malla, suma algebraica de voltajes = 0.
-   * @param {number[]} voltajes  Caídas/fuentes con signo ya aplicado.
-   */
   function leyVoltajes(voltajes) {
     if (!Array.isArray(voltajes) || voltajes.length === 0) {
       fail("ARGS_INVALIDOS", "Se espera un arreglo de voltajes.");
@@ -522,14 +437,7 @@
     };
   }
 
-  /* =========================================================
-     8. Comprobación de balance de potencia
-     ========================================================= */
-
-  /**
-   * Comprueba que la potencia entregada por la fuente
-   * es igual a la suma de potencias disipadas.
-   */
+  /* 8. Comprobación de balance de potencia */
   function balancePotencia(potenciaFuente, potenciasComponentes) {
     if (!isFiniteNumber(potenciaFuente) || !Array.isArray(potenciasComponentes)) {
       fail("ARGS_INVALIDOS", "Se espera una potencia de fuente y un arreglo de potencias.");
@@ -544,15 +452,7 @@
     };
   }
 
-    /* =========================================================
-     9. Kirchhoff ampliado (Fase 7)
-     ========================================================= */
-
-  /**
-   * Segunda ley: calcula el voltaje faltante para que la malla cuadre.
-   * @param {number[]} conocidos  Voltajes conocidos con signo.
-   * @returns {{ valor:number, unidad:string, ecuacion:string }}
-   */
+    /* 9. Kirchhoff */
   function voltajeFaltante(conocidos) {
     if (!Array.isArray(conocidos) || conocidos.length === 0) {
       fail("ARGS_INVALIDOS", "Se espera un arreglo de voltajes conocidos.");
@@ -568,13 +468,6 @@
     };
   }
 
-  /**
-   * Resuelve un sistema 2×2 por determinantes (regla de Cramer).
-   * a1·x + b1·y = c1
-   * a2·x + b2·y = c2
-   * @returns {{ x:number, y:number, det:number, detX:number, detY:number,
-   *             pasos:string[] }}
-   */
   function sistema2x2(a1, b1, c1, a2, b2, c2) {
     const coefs = [a1, b1, c1, a2, b2, c2];
     coefs.forEach((v, i) => {
@@ -608,23 +501,6 @@
     };
   }
 
-  /**
-   * Resuelve un circuito de dos mallas por el método de las corrientes de malla.
-   *
-   * Topología:
-   *   - Malla 1 (izquierda): V1 — R1 — R2 — V1
-   *   - Malla 2 (derecha):   R2 — R3 — V2 — R2   (R2 compartida)
-   *
-   * Las corrientes de malla i1 e i2 circulan en sentido horario.
-   *
-   * Ecuaciones:
-   *   Malla 1: (R1 + R2)·i1 − R2·i2 = V1
-   *   Malla 2: −R2·i1 + (R2 + R3)·i2 = −V2
-   *
-   * (El signo negativo de V2 en la malla derecha asume V2 con el + hacia arriba.)
-   *
-   * @param {object} data { V1, V2, R1, R2, R3 }
-   */
   function dosMallas(data) {
     const { V1, V2, R1, R2, R3 } = data || {};
 
@@ -648,7 +524,7 @@
     const i1 = sol.x;
     const i2 = sol.y;
 
-    // Corriente por R2 (rama compartida): sale de la diferencia
+    // Corriente por R2
     const iR2 = i1 - i2;
 
     // Voltajes de cada resistencia
@@ -656,16 +532,12 @@
     const vR2 = iR2 * R2;
     const vR3 = i2 * R3;
 
-        // Potencias disipadas
+    // Potencias disipadas
     const pR1 = i1 * i1 * R1;
     const pR2 = iR2 * iR2 * R2;
     const pR3 = i2 * i2 * R3;
     const disipada = pR1 + pR2 + pR3;
 
-    // Potencia entregada por cada fuente (en valor absoluto, para que el
-    // balance cuadre con independencia del sentido de la corriente de malla).
-    // Guardamos también el valor con signo, por si se quiere mostrar la
-    // convención de referencia (corriente saliendo por el borne positivo).
     const pV1firmada = V1 * i1;
     const pV2firmada = V2 * i2;
     const pV1 = Math.abs(pV1firmada);
@@ -690,8 +562,8 @@
           nombre: "V1",
           V: round(V1),
           I: round(i1),
-          P: round(pV1),              // potencia entregada (valor absoluto)
-          P_firmada: round(pV1firmada) // con signo, según convención
+          P: round(pV1),              
+          P_firmada: round(pV1firmada)
         },
         {
           nombre: "V2",
@@ -717,9 +589,7 @@
     };
   }
 
-  /* =========================================================
-     Exportación
-     ========================================================= */
+  /* Exportación */
 
   window.CircuitLab = window.CircuitLab || {};
   window.CircuitLab.calculos = {
@@ -756,5 +626,4 @@
     balancePotencia
   };
 
-    console.log("CircuitLab · calculos.js cargado (Fase 7 · balance corregido).");
 })();

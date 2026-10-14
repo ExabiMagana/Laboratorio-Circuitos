@@ -1,9 +1,3 @@
-/* =========================================================
-   CircuitLab — analisis.js
-   Fase 5: UI del módulo de análisis de circuitos
-   Consume window.CircuitLab.calculos y window.CircuitLab.diagramas
-   ========================================================= */
-
 (function () {
   "use strict";
 
@@ -14,9 +8,7 @@
     return;
   }
 
-  /* =========================================================
-     Utilidades
-     ========================================================= */
+  /* Utilidades */
 
   function leerNumero(input) {
     const raw = (input.value || "").trim().replace(",", ".");
@@ -71,7 +63,6 @@
     });
   }
 
-  /** Construye una tabla de resultados por componente. */
   function tablaComponentes(componentes, totales) {
     const filas = componentes.map((c) => `
       <tr>
@@ -113,7 +104,6 @@
     `;
   }
 
-  /** Bloque de verificación de leyes. */
   function verificacion(items) {
     const lis = items.map((it) => `
       <div class="verify-item verify-item--${it.ok ? "ok" : "warn"}">
@@ -136,9 +126,7 @@
     `;
   }
 
-  /* =========================================================
-     Pestañas
-     ========================================================= */
+  /* Pestañas */
   const tabs = document.querySelectorAll(".tab");
   const panels = document.querySelectorAll(".tab-panel");
 
@@ -159,9 +147,7 @@
     });
   });
 
-  /* =========================================================
-     Lista dinámica genérica
-     ========================================================= */
+  /* Lista dinámica genérica */
   function crearGestorLista(contenedor, botonAgregar, prefijo, valoresIniciales) {
     let contador = 0;
 
@@ -234,9 +220,7 @@
     };
   }
 
-  /* =========================================================
-     Serie
-     ========================================================= */
+  /* Serie */
   const serie = {
     panel:    document.getElementById("panel-serie"),
     fuente:   document.getElementById("serie-fuente"),
@@ -368,8 +352,6 @@
       const v = fila.querySelector("input").value.trim();
       if (v) datosEntrada.push({ etiqueta: `R${i + 1}`, valor: `${v} Ω` });
     });
-    // El último resultado calculado está en la closure del evento anterior.
-    // Para accederlo, volvemos a calcular con los mismos datos:
     const f = Number(serie.fuente.value.replace(",", "."));
     const resistencias = [...serie.listaEl.querySelectorAll("input")].map((i) => Number(i.value.replace(",", ".")));
     try {
@@ -380,9 +362,7 @@
     }
   });
 
-  /* =========================================================
-     Paralelo
-     ========================================================= */
+  /* Paralelo */
   const paralelo = {
     panel:    document.getElementById("panel-paralelo"),
     fuente:   document.getElementById("paralelo-fuente"),
@@ -528,9 +508,7 @@
     }
   });
 
-  /* =========================================================
-     Mixto
-     ========================================================= */
+  /* Mixto */
   const mixto = {
     panel:     document.getElementById("panel-mixto"),
     topologia: document.getElementById("mixto-topologia"),
@@ -717,8 +695,4 @@
     }
   });
 
-  /* =========================================================
-     Inicialización
-     ========================================================= */
-  console.log("CircuitLab · analisis.js cargado (Fase 10).");
 })();

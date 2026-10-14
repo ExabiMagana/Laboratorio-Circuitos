@@ -1,9 +1,3 @@
-/* =========================================================
-   CircuitLab — desafios.js
-   Fase 9: lógica del módulo de desafíos
-   Consume window.CircuitLab.categorias (Fase 9)
-   ========================================================= */
-
 (function () {
   "use strict";
 
@@ -19,19 +13,13 @@
     return;
   }
 
-  /* =========================================================
-     Estado de la sesión
-     ========================================================= */
   const estado = {
-    categoria: null,      // objeto categoría
-    indice: 0,            // pregunta actual (0..n-1)
-    respuestas: [],       // [{ acerto, opcionElegida }]
-    respondida: false     // si la pregunta actual ya fue respondida
+    categoria: null,      
+    indice: 0,            
+    respuestas: [],       
+    respondida: false 
   };
 
-  /* =========================================================
-     Utilidades
-     ========================================================= */
   function esc(s) {
     return String(s)
       .replace(/&/g, "&amp;")
@@ -44,9 +32,7 @@
     return ["A", "B", "C", "D"][i] || "?";
   }
 
-  /* =========================================================
-     Pantalla 1 — Selección de categoría
-     ========================================================= */
+  /* Pantalla 1 — Selección de categoría */
   function renderInicio() {
     const tarjetas = categorias.map((c) => `
       <button type="button" class="category-card" data-categoria="${c.id}">
@@ -78,9 +64,7 @@
     });
   }
 
-  /* =========================================================
-     Inicio de una categoría
-     ========================================================= */
+  /* Inicio de una categoría */
   function iniciarCategoria(categoria) {
     estado.categoria = categoria;
     estado.indice = 0;
@@ -89,9 +73,7 @@
     renderPregunta();
   }
 
-  /* =========================================================
-     Pantalla 2 — Pregunta
-     ========================================================= */
+  /* Pantalla 2 — Pregunta */
   function renderPregunta() {
     const cat = estado.categoria;
     const total = cat.preguntas.length;
@@ -99,7 +81,6 @@
     const num = estado.indice + 1;
     const progreso = Math.round((estado.indice / total) * 100);
 
-    // Si ya está respondida, mostramos la explicación y las marcas.
     const yaRespondida = estado.respondida;
     const elegida = yaRespondida ? estado.respuestas[estado.indice].opcionElegida : null;
 
@@ -164,7 +145,6 @@
       </div>
     `;
 
-    // Listeners
     root.querySelectorAll(".option").forEach((btn) => {
       btn.addEventListener("click", () => {
         if (estado.respondida) return;
@@ -196,9 +176,7 @@
     }
   }
 
-  /* =========================================================
-     Pantalla 3 — Resultado final
-     ========================================================= */
+  /* Pantalla 3 — Resultado final */
   function renderResultado() {
     const cat = estado.categoria;
     const total = cat.preguntas.length;
@@ -267,10 +245,6 @@
     document.getElementById("btn-reintentar").addEventListener("click", () => iniciarCategoria(cat));
   }
 
-  /* =========================================================
-     Inicio
-     ========================================================= */
   renderInicio();
 
-  console.log("CircuitLab · desafios.js cargado (Fase 9).");
 })();

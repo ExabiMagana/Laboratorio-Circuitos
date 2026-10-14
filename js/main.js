@@ -1,12 +1,6 @@
-/* =========================================================
-   CircuitLab — main.js
-   Fase 2: navegación basada en data-page y utilidades
-   ========================================================= */
-
 (function () {
   "use strict";
 
-  /* ---------- Navegación móvil ---------- */
   const navToggle = document.getElementById("navToggle");
   const appNav    = document.getElementById("appNav");
 
@@ -43,7 +37,6 @@
 
   document.addEventListener("DOMContentLoaded", updateActiveLink);
 
-  /* ---------- Utilidades generales (fases futuras) ---------- */
   window.CircuitLab = window.CircuitLab || {};
 
   window.CircuitLab.round = function (value, decimals = 4) {
@@ -64,5 +57,4 @@
     return Number.isFinite(n) && n > 0;
   };
 
-  console.log("CircuitLab · Fase 2 completada. Componentes listos.");;
 })();

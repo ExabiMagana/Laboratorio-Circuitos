@@ -1,9 +1,3 @@
-/* =========================================================
-   CircuitLab — lecciones.js
-   Fase 8: contenido de las lecciones educativas
-   Separado del HTML para facilitar el mantenimiento.
-   ========================================================= */
-
 (function () {
   "use strict";
 
@@ -11,9 +5,7 @@
 
   window.CircuitLab.lecciones = [
 
-    /* ============================================================
-       1. Magnitudes eléctricas
-       ============================================================ */
+    /* 1. Magnitudes eléctricas */
     {
       id: "magnitudes",
       titulo: "Magnitudes eléctricas",
@@ -46,9 +38,7 @@
       ]
     },
 
-    /* ============================================================
-       2. Ley de Ohm
-       ============================================================ */
+    /* 2. Ley de Ohm */
     {
       id: "ley-ohm",
       titulo: "Ley de Ohm",
@@ -78,9 +68,7 @@
       ]
     },
 
-    /* ============================================================
-       3. Potencia eléctrica
-       ============================================================ */
+    /* 3. Potencia eléctrica */
     {
       id: "potencia",
       titulo: "Potencia eléctrica",
@@ -115,9 +103,7 @@
       ]
     },
 
-    /* ============================================================
-       4. Circuitos en serie
-       ============================================================ */
+    /* 4. Circuitos en serie */
     {
       id: "serie",
       titulo: "Circuitos en serie",
@@ -153,9 +139,7 @@
       ]
     },
 
-    /* ============================================================
-       5. Circuitos en paralelo
-       ============================================================ */
+    /* 5. Circuitos en paralelo */
     {
       id: "paralelo",
       titulo: "Circuitos en paralelo",
@@ -192,9 +176,7 @@
       ]
     },
 
-    /* ============================================================
-       6. Circuitos mixtos
-       ============================================================ */
+    /* 6. Circuitos mixtos */
     {
       id: "mixtos",
       titulo: "Circuitos mixtos",
@@ -230,9 +212,7 @@
       ]
     },
 
-    /* ============================================================
-       7. Primera ley de Kirchhoff (KCL)
-       ============================================================ */
+    /* 7. Primera ley de Kirchhoff (KCL) */
     {
       id: "kcl",
       titulo: "Primera ley de Kirchhoff",
@@ -260,9 +240,7 @@
       ]
     },
 
-    /* ============================================================
-       8. Segunda ley de Kirchhoff (KVL)
-       ============================================================ */
+    /* 8. Segunda ley de Kirchhoff (KVL) */
     {
       id: "kvl",
       titulo: "Segunda ley de Kirchhoff",
@@ -289,9 +267,7 @@
       ]
     },
 
-    /* ============================================================
-       9. Unidades y conversiones
-       ============================================================ */
+    /* 9. Unidades y conversiones */
     {
       id: "unidades",
       titulo: "Unidades y conversiones",
@@ -329,5 +305,4 @@
 
   ];
 
-  console.log("CircuitLab · lecciones.js cargado (Fase 8).");
 })();

@@ -1,16 +1,5 @@
-
-/* =========================================================
-   CircuitLab — pdf.js
-   Exportación a PDF con jsPDF + svg2pdf.js
-   Expone: CircuitLab.pdf.exportar(opciones)
-   ========================================================= */
-
 (function () {
   "use strict";
-
-  /* =========================================================
-     Comprobación de dependencias
-     ========================================================= */
 
   function hayDependencias() {
     const tieneJsPDF =
@@ -35,9 +24,7 @@
     return Boolean(tieneJsPDF && tieneSvg);
   }
 
-  /* =========================================================
-     Utilidades
-     ========================================================= */
+  /* Utilidades */
 
   function fechaActual() {
     const d = new Date();
@@ -70,9 +57,7 @@
       .slice(0, 60);
   }
 
-  /* =========================================================
-     Paleta de colores
-     ========================================================= */
+  /* Paleta de colores */
 
   const COLOR = {
     brand:      [14, 165, 164],
@@ -91,11 +76,6 @@
     error:      [220, 38, 38]
   };
 
-  /* =========================================================
-     Utilidades de dibujo compartidas
-     Reciben explícitamente el documento jsPDF.
-     ========================================================= */
-
   function setColor(doc, rgb) {
     doc.setTextColor(rgb[0], rgb[1], rgb[2]);
   }
@@ -107,10 +87,6 @@
   function setFill(doc, rgb) {
     doc.setFillColor(rgb[0], rgb[1], rgb[2]);
   }
-
-  /* =========================================================
-     Motor de exportación
-     ========================================================= */
 
   async function exportar(opciones = {}) {
     if (!hayDependencias()) {
@@ -131,8 +107,6 @@
         compress: true
       });
 
-      /* Configuración de página */
-
       const PAGE_W = doc.internal.pageSize.getWidth();
       const PAGE_H = doc.internal.pageSize.getHeight();
       const MARGIN = 18;
@@ -147,9 +121,7 @@
         }
       }
 
-      /* =====================================================
-         CABECERA
-         ===================================================== */
+      /* CABECERA */
 
       setFill(doc, COLOR.brand);
       doc.rect(0, 0, PAGE_W, 24, "F");
@@ -185,9 +157,7 @@
 
       y = 34;
 
-      /* =====================================================
-         TÍTULO Y SUBTÍTULO
-         ===================================================== */
+      /* TÍTULO Y SUBTÍTULO */
 
       if (opciones.titulo) {
         setColor(doc, COLOR.text);
@@ -216,9 +186,7 @@
       doc.line(MARGIN, y, PAGE_W - MARGIN, y);
       y += 6;
 
-      /* =====================================================
-         DATOS DE ENTRADA
-         ===================================================== */
+      /* DATOS DE ENTRADA */
 
       if (
         Array.isArray(opciones.datos) &&
@@ -237,9 +205,7 @@
         y += 6;
       }
 
-      /* =====================================================
-         DIAGRAMA SVG
-         ===================================================== */
+      /* DIAGRAMA SVG */
 
       if (opciones.diagramaSVG) {
         checkPageBreak(80);
@@ -259,9 +225,7 @@
         y += 6;
       }
 
-      /* =====================================================
-         RESULTADO PRINCIPAL
-         ===================================================== */
+      /* RESULTADO PRINCIPAL */
 
       if (opciones.resultado) {
         checkPageBreak(30);
@@ -277,9 +241,7 @@
         y += 6;
       }
 
-      /* =====================================================
-         FÓRMULAS Y SUSTITUCIÓN
-         ===================================================== */
+      /* FÓRMULAS Y SUSTITUCIÓN */
 
       if (
         Array.isArray(opciones.formulas) &&
@@ -351,9 +313,7 @@
         y += 3;
       }
 
-      /* =====================================================
-         PROCEDIMIENTO
-         ===================================================== */
+      /* PROCEDIMIENTO */
 
       if (
         Array.isArray(opciones.pasos) &&
@@ -388,9 +348,7 @@
         y += 4;
       }
 
-      /* =====================================================
-         VERIFICACIONES
-         ===================================================== */
+      /* VERIFICACIONES */
 
       if (
         Array.isArray(opciones.verificaciones) &&
@@ -458,9 +416,7 @@
         y += 2;
       }
 
-      /* =====================================================
-         PIE DE PÁGINA
-         ===================================================== */
+      /* PIE DE PÁGINA */
 
       const totalPaginas = doc.internal.getNumberOfPages();
 
@@ -495,9 +451,7 @@
         );
       }
 
-      /* =====================================================
-         DESCARGA
-         ===================================================== */
+      /* DESCARGA */
 
       const nombreBase = limpiarNombre(
         opciones.titulo || "Documento"
@@ -520,9 +474,7 @@
     }
   }
 
-  /* =========================================================
-     Helpers de maquetación
-     ========================================================= */
+  /* Helpers de maquetación */
 
   function seccionTitulo(doc, texto, x, y, ancho) {
     setColor(doc, COLOR.brandDark);
@@ -633,9 +585,7 @@
     return y + 28;
   }
 
-  /* =========================================================
-     Inserción del diagrama SVG
-     ========================================================= */
+  /* Inserción del diagrama SVG */
 
   async function insertarSVG(
     doc,
@@ -644,9 +594,7 @@
     y,
     anchoMax
   ) {
-    // 1) Estilos embebidos: svg2pdf NO lee el CSS externo de la página,
-    //    así que hay que inyectar los estilos directamente en el SVG.
-    //    Los valores son copia en hex de las variables CSS de styles.css.
+
     const estilosSVG = `
       <style>
         .wire     { stroke: #2f3a4d; stroke-width: 2; fill: none; stroke-linecap: round; }
@@ -665,8 +613,6 @@
       </style>
     `;
 
-    // 2) Insertamos un fondo blanco y los estilos justo después de <svg ...>
-    //    El <rect fill="#fff"> evita que svg2pdf rellene el área con negro.
     const svgPreparado = svgString
       .replace(
         /<svg([^>]*)>/,
@@ -758,9 +704,7 @@
     return y + altoFinal + 10;
   }
 
-  /* =========================================================
-     Exponer el módulo
-     ========================================================= */
+  /* Exponer el módulo */
 
   window.CircuitLab = window.CircuitLab || {};
 
@@ -768,9 +712,5 @@
     exportar,
     hayDependencias
   };
-
-  console.log(
-    "CircuitLab · pdf.js cargado correctamente."
-  );
 
 })();
