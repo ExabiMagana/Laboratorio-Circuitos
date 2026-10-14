@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadoras eléctricas — CircuitLab</title>
+  <meta name="description" content="Calculadoras de la Ley de Ohm, potencia eléctrica y resistencia equivalente." />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="app-header__brand">
+      <a class="brand-link" href="../index.html">
+        <span class="logo-mark" aria-hidden="true">⚡</span>
+        <span class="logo-text">Circuit<strong>Lab</strong></span>
+      </a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="app-nav" id="appNav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="../index.html" data-page="inicio">Inicio</a></li>
+        <li><a href="calculadoras.html" data-page="calculadoras">Calculadoras</a></li>
+        <li><a href="analisis.html" data-page="analisis">Análisis</a></li>
+        <li><a href="kirchhoff.html" data-page="kirchhoff">Kirchhoff</a></li>
+        <li><a href="aprender.html" data-page="aprender">Aprender</a></li>
+        <li><a href="desafios.html" data-page="desafios">Desafíos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="app-main">
+
+    <nav class="breadcrumb" aria-label="Ruta de navegación">
+      <a href="../index.html">Inicio</a>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <span class="breadcrumb__current">Calculadoras eléctricas</span>
+    </nav>
+
+    <header class="page-header">
+      <h1 class="page-header__title">Calculadoras eléctricas</h1>
+      <p class="page-header__lead">
+        Herramientas para calcular la Ley de Ohm, la potencia eléctrica y la resistencia
+        equivalente. Introduce los datos, pulsa <em>Calcular</em> y observa el procedimiento.
+      </p>
+    </header>
+
+    <!-- 
+         Pestañas de calculadora
+          -->
+    <div class="tabs" role="tablist">
+      <button class="tab is-active" role="tab" aria-selected="true"
+              aria-controls="panel-ohm" id="tab-ohm" data-tab="ohm">
+        Ley de Ohm
+      </button>
+      <button class="tab" role="tab" aria-selected="false"
+              aria-controls="panel-potencia" id="tab-potencia" data-tab="potencia" tabindex="-1">
+        Potencia
+      </button>
+      <button class="tab" role="tab" aria-selected="false"
+              aria-controls="panel-req" id="tab-req" data-tab="req" tabindex="-1">
+        Resistencia equivalente
+      </button>
+    </div>
+
+    <!-- Panel 1 — Ley de Ohm -->
+    <section class="tab-panel is-active" id="panel-ohm" role="tabpanel" aria-labelledby="tab-ohm">
+
+      <div class="alert alert--info">
+        <strong>Fórmulas</strong>
+        V = I × R &nbsp;·&nbsp; I = V / R &nbsp;·&nbsp; R = V / I
+      </div>
+
+      <div class="layout-2col">
+
+        <!-- Formulario -->
+        <div class="panel">
+          <h3 class="panel__title">Datos de entrada</h3>
+
+          <div class="field">
+            <label class="field__label" for="ohm-target">¿Qué magnitud quieres calcular?</label>
+            <div class="field__control">
+              <select id="ohm-target">
+                <option value="V">Voltaje (V)</option>
+                <option value="I" selected>Corriente (I)</option>
+                <option value="R">Resistencia (R)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field" id="ohm-field-V">
+            <label class="field__label" for="ohm-V">Voltaje</label>
+            <div class="field__control">
+              <input id="ohm-V" type="text" inputmode="decimal" placeholder="Ej. 12" autocomplete="off" />
+              <span class="field__unit">V</span>
+            </div>
+            <span class="field__hint">Introduce el voltaje en voltios.</span>
+          </div>
+
+          <div class="field" id="ohm-field-I">
+            <label class="field__label" for="ohm-I">Corriente</label>
+            <div class="field__control">
+              <input id="ohm-I" type="text" inputmode="decimal" placeholder="Ej. 2" autocomplete="off" />
+              <span class="field__unit">A</span>
+            </div>
+            <span class="field__hint">Introduce la corriente en amperios.</span>
+          </div>
+
+          <div class="field" id="ohm-field-R">
+            <label class="field__label" for="ohm-R">Resistencia</label>
+            <div class="field__control">
+              <input id="ohm-R" type="text" inputmode="decimal" placeholder="Ej. 6" autocomplete="off" />
+              <span class="field__unit">Ω</span>
+            </div>
+            <span class="field__hint">Introduce la resistencia en ohmios (mayor que cero).</span>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn--primary" id="ohm-calcular">Calcular</button>
+            <button type="button" class="btn btn--ghost btn--sm" id="ohm-limpiar">Limpiar</button>
+            <button type="button" class="btn btn--pdf btn--sm" id="ohm-pdf" disabled>Exportar PDF</button>
+          </div>
+        </div>
+
+        <!-- Resultado -->
+        <div id="ohm-resultado">
+          <div class="alert alert--info">
+            <strong>Esperando datos</strong>
+            Introduce los valores y pulsa <em>Calcular</em> para ver el resultado y el procedimiento.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Panel 2 — Potencia -->
+    <section class="tab-panel" id="panel-potencia" role="tabpanel" aria-labelledby="tab-potencia" hidden>
+
+      <div class="alert alert--info">
+        <strong>Fórmulas</strong>
+        P = V × I &nbsp;·&nbsp; P = I² × R &nbsp;·&nbsp; P = V² / R
+        <br />
+        Rellena dos de las tres magnitudes (V, I, R). Se usará la fórmula más directa.
+      </div>
+
+      <div class="layout-2col">
+
+        <div class="panel">
+          <h3 class="panel__title">Datos de entrada</h3>
+
+          <div class="field" id="pot-field-V">
+            <label class="field__label" for="pot-V">Voltaje</label>
+            <div class="field__control">
+              <input id="pot-V" type="text" inputmode="decimal" placeholder="Ej. 12" autocomplete="off" />
+              <span class="field__unit">V</span>
+            </div>
+          </div>
+
+          <div class="field" id="pot-field-I">
+            <label class="field__label" for="pot-I">Corriente</label>
+            <div class="field__control">
+              <input id="pot-I" type="text" inputmode="decimal" placeholder="Ej. 2" autocomplete="off" />
+              <span class="field__unit">A</span>
+            </div>
+          </div>
+
+          <div class="field" id="pot-field-R">
+            <label class="field__label" for="pot-R">Resistencia</label>
+            <div class="field__control">
+              <input id="pot-R" type="text" inputmode="decimal" placeholder="Ej. 6" autocomplete="off" />
+              <span class="field__unit">Ω</span>
+            </div>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn--primary" id="pot-calcular">Calcular</button>
+            <button type="button" class="btn btn--ghost btn--sm" id="pot-limpiar">Limpiar</button>
+            <button type="button" class="btn btn--pdf btn--sm" id="pot-pdf" disabled>Exportar PDF</button>
+          </div>
+        </div>
+
+        <div id="pot-resultado">
+          <div class="alert alert--info">
+            <strong>Esperando datos</strong>
+            Introduce dos magnitudes y pulsa <em>Calcular</em>.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Panel 3 — Resistencia equivalente -->
+    <section class="tab-panel" id="panel-req" role="tabpanel" aria-labelledby="tab-req" hidden>
+
+      <div class="alert alert--info">
+        <strong>Fórmulas</strong>
+        Serie: R_eq = R1 + R2 + … + Rn &nbsp;·&nbsp;
+        Paralelo: 1 / R_eq = 1/R1 + 1/R2 + … + 1/Rn
+      </div>
+
+      <div class="layout-2col">
+
+        <div class="panel">
+          <h3 class="panel__title">Datos de entrada</h3>
+
+          <div class="field">
+            <label class="field__label" for="req-tipo">Tipo de conexión</label>
+            <div class="field__control">
+              <select id="req-tipo">
+                <option value="serie">En serie</option>
+                <option value="paralelo">En paralelo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field__label">Resistencias</label>
+            <div id="req-lista" class="res-list"></div>
+            <button type="button" class="btn btn--ghost btn--sm" id="req-agregar" style="margin-top: .75rem;">
+              + Añadir resistencia
+            </button>
+            <span class="field__hint">Cada resistencia debe ser un número positivo.</span>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn--primary" id="req-calcular">Calcular</button>
+            <button type="button" class="btn btn--ghost btn--sm" id="req-limpiar">Reiniciar</button>
+            <button type="button" class="btn btn--pdf btn--sm" id="req-pdf" disabled>Exportar PDF</button>
+          </div>
+        </div>
+
+        <div id="req-resultado">
+          <div class="alert alert--info">
+            <strong>Esperando datos</strong>
+            Añade resistencias y pulsa <em>Calcular</em>.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>CircuitLab — Proyecto educativo de circuitos eléctricos.</p>
+    <p class="app-footer__version">Versión 1.0</p>
+  </footer>
+
+    <script src="../js/main.js"></script>
+  <script src="../js/calculos.js"></script>
+  <script src="../js/diagramas.js"></script>
+
+  <!-- Biblioteca para generar PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Biblioteca para convertir SVG a PDF -->
+  <script src="https://cdn.jsdelivr.net/npm/svg2pdf.js@2.2.1/dist/svg2pdf.umd.min.js"></script>
+
+  <script src="../js/pdf.js"></script>
+  <script src="../js/calculadoras.js"></script>
+</body>
+</html>

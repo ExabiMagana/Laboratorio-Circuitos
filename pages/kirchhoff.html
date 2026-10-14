@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leyes de Kirchhoff — CircuitLab</title>
+  <meta name="description" content="Comprobadores de las leyes de corrientes y de voltajes, y resolución de circuitos por mallas." />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="app-header__brand">
+      <a class="brand-link" href="../index.html">
+        <span class="logo-mark" aria-hidden="true">⚡</span>
+        <span class="logo-text">Circuit<strong>Lab</strong></span>
+      </a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="app-nav" id="appNav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="../index.html" data-page="inicio">Inicio</a></li>
+        <li><a href="calculadoras.html" data-page="calculadoras">Calculadoras</a></li>
+        <li><a href="analisis.html" data-page="analisis">Análisis</a></li>
+        <li><a href="kirchhoff.html" data-page="kirchhoff">Kirchhoff</a></li>
+        <li><a href="aprender.html" data-page="aprender">Aprender</a></li>
+        <li><a href="desafios.html" data-page="desafios">Desafíos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="app-main">
+
+    <nav class="breadcrumb" aria-label="Ruta de navegación">
+      <a href="../index.html">Inicio</a>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <span class="breadcrumb__current">Leyes de Kirchhoff</span>
+    </nav>
+
+    <header class="page-header">
+      <h1 class="page-header__title">Leyes de Kirchhoff</h1>
+      <p class="page-header__lead">
+        Comprueba la ley de corrientes (KCL) y la ley de voltajes (KVL), y resuelve
+        circuitos de dos mallas mediante sistemas de ecuaciones.
+      </p>
+    </header>
+
+    <div class="tabs" role="tablist">
+      <button class="tab is-active" role="tab" aria-selected="true"
+              aria-controls="panel-kcl" id="tab-kcl" data-tab="kcl">
+        Ley de corrientes (KCL)
+      </button>
+      <button class="tab" role="tab" aria-selected="false"
+              aria-controls="panel-kvl" id="tab-kvl" data-tab="kvl" tabindex="-1">
+        Ley de voltajes (KVL)
+      </button>
+      <button class="tab" role="tab" aria-selected="false"
+              aria-controls="panel-mallas" id="tab-mallas" data-tab="mallas" tabindex="-1">
+        Resolución por mallas
+      </button>
+    </div>
+
+    <!-- Panel 1 — KCL -->
+    <section class="tab-panel is-active" id="panel-kcl" role="tabpanel" aria-labelledby="tab-kcl">
+
+      <div class="alert alert--info">
+        <strong>Primera ley de Kirchhoff</strong>
+        La suma de corrientes que entran a un nodo es igual a la suma de corrientes que salen.
+        Σ I_entra = Σ I_sale.
+      </div>
+
+      <div class="layout-2col">
+
+        <div class="panel">
+          <h3 class="panel__title">Datos de entrada</h3>
+
+          <div class="field">
+            <label class="field__label" for="kcl-modo">¿Qué quieres hacer?</label>
+            <div class="field__control">
+              <select id="kcl-modo">
+                <option value="comprobar" selected>Comprobar si se cumple</option>
+                <option value="faltante">Calcular corriente faltante</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field__label">Corrientes que ENTRAN al nodo (A)</label>
+            <div id="kcl-entrantes" class="res-list"></div>
+            <button type="button" class="btn btn--ghost btn--sm" id="kcl-add-entra" style="margin-top:.5rem;">+ Añadir entrante</button>
+          </div>
+
+          <div class="field">
+            <label class="field__label">Corrientes que SALEN del nodo (A)</label>
+            <div id="kcl-salientes" class="res-list"></div>
+            <button type="button" class="btn btn--ghost btn--sm" id="kcl-add-sale" style="margin-top:.5rem;">+ Añadir saliente</button>
+            <span class="field__hint">En modo "faltante" deja un campo vacío para que se calcule.</span>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn--primary" id="kcl-calcular">Calcular</button>
+            <button type="button" class="btn btn--ghost btn--sm" id="kcl-limpiar">Reiniciar</button>
+            <button type="button" class="btn btn--pdf btn--sm" id="kcl-pdf" disabled>Exportar PDF</button>
+          </div>
+        </div>
+
+        <div id="kcl-resultado">
+          <div class="alert alert--info">
+            <strong>Esperando datos</strong>
+            Introduce las corrientes y pulsa <em>Calcular</em>.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Panel 2 — KVL -->
+    <section class="tab-panel" id="panel-kvl" role="tabpanel" aria-labelledby="tab-kvl" hidden>
+
+      <div class="alert alert--info">
+        <strong>Segunda ley de Kirchhoff</strong>
+        En una malla cerrada, la suma algebraica de voltajes es cero.
+        Se toma como positivo el voltaje de la fuente y como negativo cada caída.
+      </div>
+
+      <div class="layout-2col">
+
+        <div class="panel">
+          <h3 class="panel__title">Datos de entrada</h3>
+
+          <div class="field">
+            <label class="field__label" for="kvl-modo">¿Qué quieres hacer?</label>
+            <div class="field__control">
+              <select id="kvl-modo">
+                <option value="comprobar" selected>Comprobar si se cumple</option>
+                <option value="faltante">Calcular caída faltante</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field__label">Voltajes en la malla (con signo)</label>
+            <div id="kvl-lista" class="res-list"></div>
+            <button type="button" class="btn btn--ghost btn--sm" id="kvl-add" style="margin-top:.5rem;">+ Añadir voltaje</button>
+            <span class="field__hint">
+              Fuente en positivo (ej. 12). Caídas en negativo (ej. -5).
+              En modo "faltante" deja un campo vacío.
+            </span>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn--primary" id="kvl-calcular">Calcular</button>
+            <button type="button" class="btn btn--ghost btn--sm" id="kvl-limpiar">Reiniciar</button>
+            <button type="button" class="btn btn--pdf btn--sm" id="kvl-pdf" disabled>Exportar PDF</button>
+          </div>
+        </div>
+
+        <div id="kvl-resultado">
+          <div class="alert alert--info">
+            <strong>Esperando datos</strong>
+            Introduce los voltajes y pulsa <em>Calcular</em>.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Panel 3 — Mallas -->
+    <section class="tab-panel" id="panel-mallas" role="tabpanel" aria-labelledby="tab-mallas" hidden>
+
+      <div class="alert alert--info">
+        <strong>Resolución por el método de las corrientes de malla</strong>
+        Circuito de dos mallas con dos fuentes y tres resistencias. Se plantea un sistema
+        2×2 y se resuelve por determinantes (regla de Cramer).
+      </div>
+
+      <div class="layout-2col">
+
+        <div class="panel">
+          <h3 class="panel__title">Datos de entrada</h3>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="field__label" for="mall-V1">Fuente V1 (malla izquierda)</label>
+              <div class="field__control">
+                <input id="mall-V1" type="text" inputmode="decimal" value="12" />
+                <span class="field__unit">V</span>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field__label" for="mall-V2">Fuente V2 (malla derecha)</label>
+              <div class="field__control">
+                <input id="mall-V2" type="text" inputmode="decimal" value="9" />
+                <span class="field__unit">V</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="field__label" for="mall-R1">R1 (izquierda)</label>
+              <div class="field__control">
+                <input id="mall-R1" type="text" inputmode="decimal" value="2" />
+                <span class="field__unit">Ω</span>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field__label" for="mall-R2">R2 (rama central)</label>
+              <div class="field__control">
+                <input id="mall-R2" type="text" inputmode="decimal" value="4" />
+                <span class="field__unit">Ω</span>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field__label" for="mall-R3">R3 (derecha)</label>
+              <div class="field__control">
+                <input id="mall-R3" type="text" inputmode="decimal" value="6" />
+                <span class="field__unit">Ω</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn--primary" id="mall-calcular">Calcular</button>
+            <button type="button" class="btn btn--ghost btn--sm" id="mall-limpiar">Reiniciar</button>
+            <button type="button" class="btn btn--pdf btn--sm" id="mall-pdf" disabled>Exportar PDF</button>
+          </div>
+        </div>
+
+        <div id="mall-resultado">
+          <div class="alert alert--info">
+            <strong>Esperando datos</strong>
+            Ajusta los valores y pulsa <em>Calcular</em>.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>CircuitLab — Proyecto educativo de circuitos eléctricos.</p>
+    <p class="app-footer__version">Versión 1.0</p>
+  </footer>
+
+    <script src="../js/main.js"></script>
+  <script src="../js/calculos.js"></script>
+  <script src="../js/diagramas.js"></script>
+
+    <!-- Biblioteca para generar PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Biblioteca para convertir SVG a PDF -->
+  <script src="https://cdn.jsdelivr.net/npm/svg2pdf.js@2.2.1/dist/svg2pdf.umd.min.js"></script>
+
+  <script src="../js/pdf.js"></script>
+
+  <script src="../js/kirchhoff.js"></script>
+</body>
+</html>

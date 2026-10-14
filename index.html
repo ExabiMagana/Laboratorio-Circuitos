@@ -9,11 +9,12 @@
 </head>
 <body>
 
-  <!-- ===== Cabecera / Navegación ===== -->
   <header class="app-header">
     <div class="app-header__brand">
-      <span class="logo-mark" aria-hidden="true">⚡</span>
-      <span class="logo-text">Circuit<strong>Lab</strong></span>
+      <a class="brand-link" href="index.html">
+        <span class="logo-mark" aria-hidden="true">⚡</span>
+        <span class="logo-text">Circuit<strong>Lab</strong></span>
+      </a>
     </div>
 
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
@@ -22,20 +23,18 @@
 
     <nav class="app-nav" id="appNav" aria-label="Navegación principal">
       <ul>
-        <li><a href="#inicio" class="is-active">Inicio</a></li>
-        <li><a href="#calculadoras">Calculadoras</a></li>
-        <li><a href="#analisis">Análisis</a></li>
-        <li><a href="#kirchhoff">Kirchhoff</a></li>
-        <li><a href="#aprender">Aprender</a></li>
-        <li><a href="#desafios">Desafíos</a></li>
+        <li><a href="index.html" data-page="inicio">Inicio</a></li>
+        <li><a href="pages/calculadoras.html" data-page="calculadoras">Calculadoras</a></li>
+        <li><a href="pages/analisis.html" data-page="analisis">Análisis</a></li>
+        <li><a href="pages/kirchhoff.html" data-page="kirchhoff">Kirchhoff</a></li>
+        <li><a href="pages/aprender.html" data-page="aprender">Aprender</a></li>
+        <li><a href="pages/desafios.html" data-page="desafios">Desafíos</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- ===== Contenido principal ===== -->
   <main class="app-main">
 
-    <!-- Sección: Inicio -->
     <section id="inicio" class="section section--hero">
       <p class="hero__eyebrow">Laboratorio de circuitos eléctricos</p>
       <h1 class="hero__title">Bienvenido a <span class="accent">CircuitLab</span></h1>
@@ -45,12 +44,11 @@
       </p>
 
       <div class="hero__actions">
-        <a href="#calculadoras" class="btn btn--primary">Empezar a calcular</a>
-        <a href="#aprender" class="btn btn--ghost">Aprender los conceptos</a>
+        <a href="pages/calculadoras.html" class="btn btn--primary">Empezar a calcular</a>
+        <a href="pages/aprender.html" class="btn btn--ghost">Aprender los conceptos</a>
       </div>
     </section>
 
-    <!-- Sección: Accesos rápidos a módulos -->
     <section class="section">
       <header class="section__header">
         <h2 class="section__title">Módulos de la aplicación</h2>
@@ -59,7 +57,7 @@
 
       <div class="card-grid">
 
-        <article class="card card--voltage" id="calculadoras">
+        <a class="card card--voltage" href="pages/calculadoras.html">
           <header class="card__header">
             <span class="card__icon" aria-hidden="true">🧮</span>
             <h3 class="card__title">Calculadoras eléctricas</h3>
@@ -72,10 +70,10 @@
             <li>Potencia eléctrica</li>
             <li>Resistencia equivalente</li>
           </ul>
-          <span class="card__badge">Próximamente</span>
-        </article>
+          <span class="card__badge">Abrir módulo</span>
+        </a>
 
-        <article class="card card--current" id="analisis">
+        <a class="card card--current" href="pages/analisis.html">
           <header class="card__header">
             <span class="card__icon" aria-hidden="true">🔌</span>
             <h3 class="card__title">Análisis de circuitos</h3>
@@ -88,10 +86,10 @@
             <li>Paralelo</li>
             <li>Mixtos prediseñados</li>
           </ul>
-          <span class="card__badge">Próximamente</span>
-        </article>
+          <span class="card__badge">Abrir módulo</span>
+        </a>
 
-        <article class="card card--resistance" id="kirchhoff">
+        <a class="card card--resistance" href="pages/kirchhoff.html">
           <header class="card__header">
             <span class="card__icon" aria-hidden="true">📐</span>
             <h3 class="card__title">Leyes de Kirchhoff</h3>
@@ -104,10 +102,10 @@
             <li>Ley de voltajes</li>
             <li>Resolución por sistemas</li>
           </ul>
-          <span class="card__badge">Próximamente</span>
-        </article>
+          <span class="card__badge">Abrir módulo</span>
+        </a>
 
-        <article class="card card--power" id="aprender">
+        <a class="card card--power" href="pages/aprender.html">
           <header class="card__header">
             <span class="card__icon" aria-hidden="true">📚</span>
             <h3 class="card__title">Aprender</h3>
@@ -120,10 +118,10 @@
             <li>Ley de Ohm y potencia</li>
             <li>Circuitos y Kirchhoff</li>
           </ul>
-          <span class="card__badge">Próximamente</span>
-        </article>
+          <span class="card__badge">Abrir módulo</span>
+        </a>
 
-        <article class="card card--success" id="desafios">
+        <a class="card card--success" href="pages/desafios.html">
           <header class="card__header">
             <span class="card__icon" aria-hidden="true">🎯</span>
             <h3 class="card__title">Desafíos</h3>
@@ -136,13 +134,12 @@
             <li>Cálculos</li>
             <li>Circuitos y leyes</li>
           </ul>
-          <span class="card__badge">Próximamente</span>
-        </article>
+          <span class="card__badge">Abrir módulo</span>
+        </a>
 
       </div>
     </section>
 
-    <!-- Sección: Magnitudes eléctricas -->
     <section class="section">
       <header class="section__header">
         <h2 class="section__title">Magnitudes eléctricas</h2>
@@ -172,15 +169,16 @@
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- ===== Pie de página ===== -->
   <footer class="app-footer">
     <p>CircuitLab — Proyecto educativo de circuitos eléctricos.</p>
-    <p class="app-footer__version">Versión 0.1 · Fase 1</p>
+    <p class="app-footer__version">Versión 1.0</p>
   </footer>
 
   <script src="js/main.js"></script>
+
+  <script src="js/calculos.js"></script>
+</body>
 </body>
 </html>

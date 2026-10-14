@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aprender — CircuitLab</title>
+  <meta name="description" content="Lecciones y ejemplos resueltos de electricidad básica." />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="app-header__brand">
+      <a class="brand-link" href="../index.html">
+        <span class="logo-mark" aria-hidden="true">⚡</span>
+        <span class="logo-text">Circuit<strong>Lab</strong></span>
+      </a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="app-nav" id="appNav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="../index.html" data-page="inicio">Inicio</a></li>
+        <li><a href="calculadoras.html" data-page="calculadoras">Calculadoras</a></li>
+        <li><a href="analisis.html" data-page="analisis">Análisis</a></li>
+        <li><a href="kirchhoff.html" data-page="kirchhoff">Kirchhoff</a></li>
+        <li><a href="aprender.html" data-page="aprender">Aprender</a></li>
+        <li><a href="desafios.html" data-page="desafios">Desafíos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="app-main">
+
+    <nav class="breadcrumb" aria-label="Ruta de navegación">
+      <a href="../index.html">Inicio</a>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <span class="breadcrumb__current">Aprender</span>
+    </nav>
+
+    <header class="page-header">
+      <h1 class="page-header__title">Aprender</h1>
+      <p class="page-header__lead">
+        Definiciones, fórmulas y ejemplos resueltos de electricidad básica.
+        Cada lección incluye un enlace a la herramienta correspondiente para practicar.
+      </p>
+    </header>
+
+    <div class="lesson-layout">
+
+      <!-- Índice lateral -->
+      <aside class="lesson-nav" aria-label="Índice de lecciones">
+        <h2 class="lesson-nav__title">Contenido</h2>
+        <ol class="lesson-nav__list" id="lesson-nav-list">
+          <!-- Se rellena dinámicamente desde aprender.js -->
+        </ol>
+      </aside>
+
+      <!-- Lecciones -->
+      <div class="lesson-content" id="lesson-content">
+        <!-- Se rellena dinámicamente desde aprender.js -->
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>CircuitLab — Proyecto educativo de circuitos eléctricos.</p>
+    <p class="app-footer__version">Versión 0.1 · Fase 8</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/lecciones.js"></script>
+  <script src="../js/aprender.js"></script>
+</body>
+</html>

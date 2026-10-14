@@ -1,47 +1,35 @@
-/* =========================================================
-   CircuitLab — Estilos globales
-   Fase 1: identidad visual "Laboratorio claro"
-   Paleta clara tipo cuaderno técnico moderno
-   ========================================================= */
-
-/* ---------- Variables de diseño ---------- */
+/* ---------- 01. VARIABLES DE DISEÑO ---------- */
 :root {
   /* Fondos */
-  --bg-page:       #f7f5ef;   /* blanco cálido tipo papel */
-  --bg-surface:    #ffffff;   /* tarjetas */
-  --bg-alt:        #eef2f7;   /* bandas y secciones alternas */
-  --bg-grid:       rgba(26, 35, 50, .045);  /* cuadrícula sutil */
-
+  --bg-page:       #f7f5ef;
+  --bg-surface:    #ffffff;
+  --bg-alt:        #eef2f7;
+  --bg-grid:       rgba(26, 35, 50, .045);
   /* Texto */
   --text-strong:   #1a2332;
   --text:          #2f3a4d;
   --text-soft:     #4a5568;
   --text-muted:    #8a94a6;
-
   /* Bordes */
   --border:        #d9dee7;
   --border-strong: #b8c2d1;
-
   /* Acentos semánticos (magnitudes) */
-  --c-voltage:     #2563eb;   /* azul eléctrico */
-  --c-current:     #ea580c;   /* naranja quemado */
-  --c-resistance:  #7c3aed;   /* violeta */
-  --c-power:       #ca8a04;   /* mostaza / ámbar oscuro */
-  --c-success:     #16a34a;   /* verde bosque */
-  --c-warning:     #d97706;   /* ámbar */
-  --c-error:       #dc2626;   /* rojo */
-
-  /* Marca CircuitLab */
-  --brand:         #0ea5a4;   /* turquesa */
-  --brand-strong:  #0b7f7e;   /* turquesa oscuro para hover */
+  --c-voltage:     #2563eb;
+  --c-current:     #ea580c;
+  --c-resistance:  #7c3aed;
+  --c-power:       #ca8a04;
+  --c-success:     #16a34a;
+  --c-warning:     #d97706;
+  --c-error:       #dc2626;
+  /* Marca */
+  --brand:         #0ea5a4;
+  --brand-strong:  #0b7f7e;
   --brand-soft:    rgba(14, 165, 164, .12);
-  --accent-2:      #f59e0b;   /* ámbar cálido */
-
-  /* Sombras tipo "papel" */
+  --accent-2:      #f59e0b;
+  /* Sombras */
   --shadow-xs: 0 1px 0 rgba(26, 35, 50, .06);
   --shadow-sm: 0 1px 0 rgba(26, 35, 50, .06), 0 2px 6px rgba(26, 35, 50, .04);
   --shadow-md: 0 2px 0 rgba(26, 35, 50, .08);
-
   /* Radios y espaciado */
   --radius-sm: 4px;
   --radius-md: 6px;
@@ -53,32 +41,26 @@
   --space-5: 1.5rem;
   --space-6: 2rem;
   --space-7: 3rem;
-
   /* Tipografía */
   --font-base: "Inter", "Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", Consolas, "SF Mono", Menlo, monospace;
-
   /* Layout */
   --max-width: 1160px;
   --header-height: 64px;
 }
 
-/* ---------- Reset básico ---------- */
+/* ---------- 02. RESET Y ELEMENTOS BASE ---------- */
 *,
 *::before,
 *::after { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 html, body { margin: 0; padding: 0; }
-
 body {
   color: var(--text);
   font-family: var(--font-base);
   font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-
-  /* Cuadrícula técnica sutil de fondo */
   background-color: var(--bg-page);
   background-image:
     linear-gradient(var(--bg-grid) 1px, transparent 1px),
@@ -93,6 +75,7 @@ a {
   border-bottom: 1px solid transparent;
   transition: border-color .15s, color .15s;
 }
+
 a:hover {
   color: var(--brand);
   border-bottom-color: currentColor;
@@ -106,17 +89,14 @@ h1, h2, h3, h4 {
 }
 
 p { margin: 0 0 var(--space-3); }
-
 ul { margin: 0; padding-left: 1.1rem; }
-
 img, svg { max-width: 100%; display: block; }
-
 ::selection {
   background: var(--brand-soft);
   color: var(--text-strong);
 }
 
-/* ---------- Cabecera ---------- */
+/* ---------- 03. CABECERA ---------- */
 .app-header {
   position: sticky;
   top: 0;
@@ -157,7 +137,7 @@ img, svg { max-width: 100%; display: block; }
 .logo-text { color: var(--text-strong); font-weight: 500; }
 .logo-text strong { color: var(--brand-strong); font-weight: 700; }
 
-/* ---------- Navegación ---------- */
+/* ---------- 03. NAVEGACIÓN ---------- */
 .app-nav ul {
   display: flex;
   gap: var(--space-1);
@@ -175,18 +155,20 @@ img, svg { max-width: 100%; display: block; }
   border-bottom: 2px solid transparent;
   transition: color .15s, border-color .15s, background-color .15s;
 }
+
 .app-nav a:hover {
   color: var(--text-strong);
   background: var(--bg-alt);
   border-bottom-color: transparent;
 }
+
 .app-nav a.is-active {
   color: var(--text-strong);
   border-bottom-color: var(--brand);
   background: transparent;
 }
 
-/* Botón hamburguesa (móvil) */
+/* Botón hamburguesa */
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -200,6 +182,7 @@ img, svg { max-width: 100%; display: block; }
   border-radius: var(--radius-sm);
   cursor: pointer;
 }
+
 .nav-toggle span {
   display: block;
   width: 20px;
@@ -208,7 +191,7 @@ img, svg { max-width: 100%; display: block; }
   background: var(--text-strong);
 }
 
-/* ---------- Contenido principal ---------- */
+/* ---------- 04. CONTENIDO PRINCIPAL ---------- */
 .app-main {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -216,7 +199,6 @@ img, svg { max-width: 100%; display: block; }
 }
 
 .section { margin-bottom: var(--space-7); }
-
 .section__header {
   margin-bottom: var(--space-5);
   padding-bottom: var(--space-3);
@@ -229,6 +211,7 @@ img, svg { max-width: 100%; display: block; }
   position: relative;
   padding-left: var(--space-4);
 }
+
 .section__title::before {
   content: "";
   position: absolute;
@@ -246,7 +229,7 @@ img, svg { max-width: 100%; display: block; }
   padding-left: var(--space-4);
 }
 
-/* ---------- Hero ---------- */
+/* ---------- 05. HERO / PRESENTACIÓN ---------- */
 .section--hero {
   padding: var(--space-7) 0 var(--space-6);
   border-bottom: 1px solid var(--border);
@@ -275,6 +258,7 @@ img, svg { max-width: 100%; display: block; }
   color: var(--brand-strong);
   position: relative;
 }
+
 .hero__title .accent::after {
   content: "";
   position: absolute;
@@ -301,7 +285,7 @@ img, svg { max-width: 100%; display: block; }
   gap: var(--space-3);
 }
 
-/* ---------- Botones ---------- */
+/* ---------- 06. BOTONES ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -316,15 +300,16 @@ img, svg { max-width: 100%; display: block; }
   transition: transform .08s, background-color .15s, border-color .15s, color .15s;
   text-decoration: none;
 }
+
 .btn:hover { border-bottom-color: transparent; }
 .btn:active { transform: translateY(1px); }
-
 .btn--primary {
   background: var(--brand);
   color: #ffffff;
   border-color: var(--brand);
   box-shadow: var(--shadow-xs);
 }
+
 .btn--primary:hover {
   background: var(--brand-strong);
   border-color: var(--brand-strong);
@@ -336,12 +321,13 @@ img, svg { max-width: 100%; display: block; }
   color: var(--text-strong);
   border-color: var(--border-strong);
 }
+
 .btn--ghost:hover {
   background: var(--bg-alt);
   color: var(--text-strong);
 }
 
-/* ---------- Tarjetas de módulos ---------- */
+/* ---------- 07. TARJETAS DE MÓDULOS ---------- */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -350,7 +336,6 @@ img, svg { max-width: 100%; display: block; }
 
 .card {
   --card-accent: var(--brand);
-
   position: relative;
   display: flex;
   flex-direction: column;
@@ -363,18 +348,18 @@ img, svg { max-width: 100%; display: block; }
   box-shadow: var(--shadow-sm);
   transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
 }
+
 .card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
-/* Variantes por magnitud (color del borde izquierdo) */
+/* Variantes por magnitud */
 .card--voltage    { --card-accent: var(--c-voltage); }
 .card--current    { --card-accent: var(--c-current); }
 .card--resistance { --card-accent: var(--c-resistance); }
 .card--power      { --card-accent: var(--c-power); }
 .card--success    { --card-accent: var(--c-success); }
-
 .card__header {
   display: flex;
   align-items: center;
@@ -412,9 +397,11 @@ img, svg { max-width: 100%; display: block; }
   color: var(--text-soft);
   font-size: .9rem;
 }
+
 .card__list li {
   padding: 2px 0;
 }
+
 .card__list li::before {
   content: "▸";
   color: var(--card-accent);
@@ -436,7 +423,7 @@ img, svg { max-width: 100%; display: block; }
   border: 1px solid var(--border);
 }
 
-/* ---------- Magnitudes ---------- */
+/* ---------- 07. MAGNITUDES ---------- */
 .magnitude-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -445,7 +432,6 @@ img, svg { max-width: 100%; display: block; }
 
 .magnitude {
   --mag-color: var(--brand);
-
   padding: var(--space-4);
   background: var(--bg-surface);
   border: 1px solid var(--border);
@@ -453,6 +439,7 @@ img, svg { max-width: 100%; display: block; }
   box-shadow: var(--shadow-xs);
   position: relative;
 }
+
 .magnitude::before {
   content: "";
   position: absolute;
@@ -468,7 +455,6 @@ img, svg { max-width: 100%; display: block; }
 .magnitude--current    { --mag-color: var(--c-current); }
 .magnitude--resistance { --mag-color: var(--c-resistance); }
 .magnitude--power      { --mag-color: var(--c-power); }
-
 .magnitude__symbol {
   display: inline-flex;
   align-items: center;
@@ -496,7 +482,7 @@ img, svg { max-width: 100%; display: block; }
   margin: 0;
 }
 
-/* ---------- Pie ---------- */
+/* ---------- 03. PIE DE PÁGINA ---------- */
 .app-footer {
   border-top: 1px solid var(--border);
   background: var(--bg-alt);
@@ -505,6 +491,7 @@ img, svg { max-width: 100%; display: block; }
   color: var(--text-muted);
   font-size: .85rem;
 }
+
 .app-footer p { margin: 0 0 var(--space-1); }
 .app-footer__version {
   font-family: var(--font-mono);
@@ -514,7 +501,6 @@ img, svg { max-width: 100%; display: block; }
 /* ---------- Responsive ---------- */
 @media (max-width: 720px) {
   .nav-toggle { display: flex; }
-
   .app-nav {
     position: absolute;
     top: var(--header-height);
@@ -528,7 +514,6 @@ img, svg { max-width: 100%; display: block; }
     box-shadow: 0 8px 16px rgba(26, 35, 50, .06);
   }
   .app-nav.is-open { max-height: 340px; }
-
   .app-nav ul {
     flex-direction: column;
     gap: 0;
@@ -544,16 +529,13 @@ img, svg { max-width: 100%; display: block; }
     border-left-color: var(--brand);
     background: var(--bg-alt);
   }
-
   .app-main { padding: var(--space-5) var(--space-4) var(--space-6); }
-
   .section__title { font-size: 1.3rem; }
-
   .hero__actions { flex-direction: column; align-items: stretch; }
   .btn { justify-content: center; }
 }
 
-/* ---------- Accesibilidad ---------- */
+/* ---------- 02. ACCESIBILIDAD ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
@@ -562,9 +544,1340 @@ img, svg { max-width: 100%; display: block; }
   }
 }
 
-/* Foco visible para navegación por teclado */
+/* Foco visible */
 :focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
+}
+
+/* ---------- 03. MARCA / LOGOTIPO ---------- */
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: inherit;
+  border-bottom: none;
+}
+
+.brand-link:hover {
+  color: inherit;
+  border-bottom-color: transparent;
+}
+
+/* ---------- 04. CABECERA DE PÁGINA INTERIOR ---------- */
+.page-header {
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 2px solid var(--border);
+}
+
+.page-header__title {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  margin-bottom: var(--space-2);
+  letter-spacing: -0.02em;
+}
+
+.page-header__lead {
+  color: var(--text-soft);
+  font-size: 1.02rem;
+  max-width: 70ch;
+  margin: 0;
+}
+
+/* ---------- 04. MIGAS DE PAN ---------- */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: .82rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.breadcrumb a {
+  color: var(--brand-strong);
+  border-bottom: 1px solid transparent;
+}
+
+.breadcrumb a:hover {
+  color: var(--brand);
+  border-bottom-color: currentColor;
+}
+
+.breadcrumb__sep {
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.breadcrumb__current {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+/* ---------- 08. ALERTAS Y AVISOS ---------- */
+.alert {
+  --alert-color: var(--brand);
+  --alert-bg: var(--brand-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-5);
+  background: var(--alert-bg);
+  border: 1px solid color-mix(in srgb, var(--alert-color) 35%, transparent);
+  border-left: 4px solid var(--alert-color);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  font-size: .95rem;
+}
+
+.alert strong {
+  color: var(--alert-color);
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+.alert--info {
+  --alert-color: var(--c-voltage);
+  --alert-bg: color-mix(in srgb, var(--c-voltage) 8%, var(--bg-surface));
+}
+
+.alert--success {
+  --alert-color: var(--c-success);
+  --alert-bg: color-mix(in srgb, var(--c-success) 8%, var(--bg-surface));
+}
+
+.alert--warning {
+  --alert-color: var(--c-warning);
+  --alert-bg: color-mix(in srgb, var(--c-warning) 10%, var(--bg-surface));
+}
+
+.alert--error {
+  --alert-color: var(--c-error);
+  --alert-bg: color-mix(in srgb, var(--c-error) 8%, var(--bg-surface));
+}
+
+/* ---------- 08. FORMULARIOS Y CAMPOS ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+
+.field__label {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.field__hint {
+  font-size: .8rem;
+  color: var(--text-muted);
+}
+
+.field__control {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  overflow: hidden;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.field__control:focus-within {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+.field__control input,
+.field__control select {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: var(--space-3);
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-strong);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.field__control select {
+  font-family: var(--font-base);
+  cursor: pointer;
+}
+
+.field__unit {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--space-3);
+  background: var(--bg-alt);
+  color: var(--text-soft);
+  font-family: var(--font-mono);
+  font-size: .9rem;
+  border-left: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+/* Campo inválido */
+.field--invalid .field__control {
+  border-color: var(--c-error);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-error) 15%, transparent);
+}
+
+.field--invalid .field__hint {
+  color: var(--c-error);
+}
+
+/* Fila de campos */
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+/* ---------- 07. TARJETAS DE RESULTADO ---------- */
+.result-card {
+  --result-color: var(--brand);
+  padding: var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--result-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-4);
+}
+
+.result-card--voltage    { --result-color: var(--c-voltage); }
+.result-card--current    { --result-color: var(--c-current); }
+.result-card--resistance { --result-color: var(--c-resistance); }
+.result-card--power      { --result-color: var(--c-power); }
+.result-card--success    { --result-color: var(--c-success); }
+.result-card__label {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.result-card__value {
+  font-family: var(--font-mono);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  color: var(--result-color);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--space-1);
+}
+
+.result-card__unit {
+  font-size: .5em;
+  color: var(--text-soft);
+  margin-left: var(--space-2);
+  font-weight: 500;
+}
+
+.result-card__note {
+  font-size: .88rem;
+  color: var(--text-soft);
+  margin: var(--space-2) 0 0;
+}
+
+/* ---------- 09. FÓRMULAS Y PROCEDIMIENTOS ---------- */
+.formula {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-alt);
+  border-left: 3px solid var(--brand);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text-strong);
+  margin: var(--space-2) 0 var(--space-3);
+  overflow-x: auto;
+}
+
+.formula--inline {
+  display: inline-block;
+  padding: 2px 8px;
+  margin: 0;
+  font-size: .95em;
+}
+
+.steps {
+  list-style: none;
+  counter-reset: step;
+  padding: 0;
+  margin: var(--space-3) 0;
+}
+
+.steps > li {
+  counter-increment: step;
+  position: relative;
+  padding-left: var(--space-6);
+  padding-bottom: var(--space-3);
+  border-left: 1px dashed var(--border-strong);
+  margin-left: 14px;
+}
+
+.steps > li:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.steps > li::before {
+  content: counter(step);
+  position: absolute;
+  left: -14px;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand);
+  color: #ffffff;
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+.steps__title {
+  display: block;
+  font-weight: 600;
+  color: var(--text-strong);
+  margin-bottom: var(--space-1);
+}
+
+.steps__detail {
+  display: block;
+  color: var(--text-soft);
+  font-size: .92rem;
+}
+
+/* ---------- 09. TABLAS DE RESULTADOS ---------- */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .92rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-4);
+}
+
+.data-table caption {
+  caption-side: top;
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  font-weight: 600;
+  color: var(--text-strong);
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table th,
+.data-table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table thead th {
+  background: var(--bg-alt);
+  color: var(--text-strong);
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+  background: color-mix(in srgb, var(--brand) 4%, transparent);
+}
+
+.data-table td.numeric,
+.data-table th.numeric {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.data-table tfoot td {
+  background: var(--bg-alt);
+  font-weight: 700;
+  color: var(--text-strong);
+  border-top: 2px solid var(--border-strong);
+}
+
+/* ---------- 06. BOTÓN DE EXPORTAR PDF ---------- */
+.btn--pdf {
+  background: var(--bg-surface);
+  color: var(--c-error);
+  border: 1px solid color-mix(in srgb, var(--c-error) 40%, var(--border));
+}
+
+.btn--pdf:hover {
+  background: color-mix(in srgb, var(--c-error) 8%, var(--bg-surface));
+  border-color: var(--c-error);
+  color: var(--c-error);
+}
+
+.btn--pdf::before {
+  content: "📄";
+  margin-right: var(--space-1);
+  font-size: 1em;
+}
+
+/* Variantes útiles adicionales */
+.btn--block {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn--sm {
+  padding: var(--space-2) var(--space-3);
+  font-size: .85rem;
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+/* ---------- 08. PANELES DE CONTENIDO ---------- */
+.panel {
+  padding: var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-5);
+}
+
+.panel__title {
+  font-size: 1.05rem;
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---------- 08. DISTRIBUCIÓN DE FORMULARIO Y RESULTADO ---------- */
+.layout-2col {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: var(--space-5);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .layout-2col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- 14. RESPONSIVE — COMPONENTES ---------- */
+@media (max-width: 720px) {
+  .alert { padding: var(--space-3) var(--space-4); }
+  .result-card { padding: var(--space-4); }
+  .data-table th,
+  .data-table td { padding: var(--space-2) var(--space-3); }
+  .panel { padding: var(--space-4); }
+  .breadcrumb { font-size: .76rem; }
+}
+
+/* ---------- 10. PESTAÑAS ---------- */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  border-bottom: 2px solid var(--border);
+  margin-bottom: var(--space-5);
+}
+
+.tab {
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: -2px;
+  color: var(--text-soft);
+  font-family: inherit;
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color .15s, border-color .15s, background-color .15s;
+}
+
+.tab:hover {
+  color: var(--text-strong);
+  background: var(--bg-alt);
+}
+
+.tab.is-active {
+  color: var(--brand-strong);
+  border-bottom-color: var(--brand);
+}
+
+.tab-panel {
+  animation: fadeIn .18s ease;
+}
+
+.tab-panel[hidden] {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- 10. LISTA DINÁMICA DE RESISTENCIAS ---------- */
+.res-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.res-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-2);
+  align-items: stretch;
+}
+
+.res-row .field__control {
+  flex: 1 1 auto;
+}
+
+.res-row__label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--space-2) 0 0;
+  font-family: var(--font-mono);
+  font-size: .9rem;
+  color: var(--text-soft);
+  white-space: nowrap;
+}
+
+.res-row__remove {
+  appearance: none;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  color: var(--c-error);
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+  width: 44px;
+  cursor: pointer;
+  transition: background-color .15s, border-color .15s;
+}
+
+.res-row__remove:hover {
+  background: color-mix(in srgb, var(--c-error) 10%, var(--bg-surface));
+  border-color: var(--c-error);
+}
+
+.res-row__remove:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+
+/* ---------- 10. BLOQUES DE SALIDA ---------- */
+.output-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.output-stack h4 {
+  margin: var(--space-3) 0 var(--space-2);
+  font-size: .95rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-soft);
+}
+
+/* Ajuste responsive específico de las calculadoras */
+@media (max-width: 720px) {
+  .tab { padding: var(--space-2) var(--space-3); font-size: .88rem; }
+  .res-row { grid-template-columns: 1fr auto; }
+}
+
+/* ---------- 10. DISTRIBUCIÓN DEL RESULTADO ---------- */
+.analysis-output {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* ---------- 10. RESUMEN DE RESULTADOS ---------- */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-3);
+}
+
+.summary-tile {
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--tile-color, var(--brand));
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs);
+}
+
+.summary-tile__label {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.summary-tile__value {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.summary-tile__unit {
+  font-size: .75em;
+  color: var(--text-soft);
+  margin-left: 4px;
+  font-weight: 500;
+}
+
+.summary-tile--voltage  { --tile-color: var(--c-voltage); }
+.summary-tile--current  { --tile-color: var(--c-current); }
+.summary-tile--resist   { --tile-color: var(--c-resistance); }
+.summary-tile--power    { --tile-color: var(--c-power); }
+
+/* ---------- 09. VERIFICACIÓN ---------- */
+.verify-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.verify-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--verify-color, var(--c-success));
+  border-radius: var(--radius-md);
+  font-size: .92rem;
+}
+
+.verify-item--ok    { --verify-color: var(--c-success); }
+.verify-item--warn  { --verify-color: var(--c-warning); }
+.verify-item--error { --verify-color: var(--c-error); }
+.verify-item__icon {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  line-height: 1.2;
+  color: var(--verify-color);
+  font-weight: 700;
+}
+
+.verify-item__body {
+  flex: 1 1 auto;
+}
+
+.verify-item__title {
+  font-weight: 600;
+  color: var(--text-strong);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.verify-item__detail {
+  font-family: var(--font-mono);
+  color: var(--text-soft);
+  font-size: .85rem;
+  display: block;
+}
+
+/* ---------- 11. DIAGRAMAS SVG ---------- */
+.diagram {
+  margin: var(--space-4) 0;
+  padding: var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs);
+  overflow-x: auto;
+}
+
+.diagram__caption {
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.diagram svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Marco del diagrama */
+.diagram .frame {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  opacity: .5;
+}
+
+/* Cables y símbolos */
+.diagram .wire     { stroke: var(--text-strong); stroke-width: 2; fill: none; stroke-linecap: round; }
+.diagram .resistor { fill: none; stroke: var(--c-resistance); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.diagram .battery  { stroke: var(--c-voltage); stroke-width: 2.5; stroke-linecap: round; }
+.diagram .node     { fill: var(--text-strong); stroke: var(--bg-surface); stroke-width: 1.5; }
+/* Etiquetas */
+.diagram .label        { fill: var(--text-strong); font-family: var(--font-mono); font-size: 12px; font-weight: 600; }
+.diagram .label-soft   { fill: var(--text-soft);  font-family: var(--font-mono); font-size: 11px; }
+.diagram .label-current{ fill: var(--c-current);  font-family: var(--font-mono); font-size: 11px; font-weight: 700; }
+.diagram .label-voltage{ fill: var(--c-voltage);  font-family: var(--font-mono); font-size: 11px; font-weight: 700; }
+/* Flechas de corriente */
+.diagram .current {
+  stroke: var(--c-current);
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.diagram polygon.current {
+  fill: var(--c-current);
+  stroke: none;
+}
+
+/* Marcas de voltaje */
+.diagram .voltage-marks text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--c-voltage);
+}
+
+/* Sistema de ecuaciones: caja destacada */
+.equation-box {
+  padding: var(--space-4) var(--space-5);
+  background: var(--bg-alt);
+  border-left: 4px solid var(--brand);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text-strong);
+  margin: var(--space-3) 0;
+  overflow-x: auto;
+}
+
+.equation-box .eq-line {
+  display: block;
+  padding: var(--space-1) 0;
+}
+
+.equation-box .eq-line + .eq-line {
+  border-top: 1px dashed var(--border);
+}
+
+@media (max-width: 720px) {
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lesson-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* ---------- 12. ÍNDICE LATERAL DE LECCIONES ---------- */
+.lesson-nav {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-4));
+  max-height: calc(100vh - var(--header-height) - var(--space-6));
+  overflow-y: auto;
+  padding: var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs);
+}
+
+.lesson-nav__title {
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.lesson-nav__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: lesson;
+}
+
+.lesson-nav__list li {
+  margin-bottom: 2px;
+}
+
+.lesson-nav__link {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid transparent;
+  color: var(--text-soft);
+  font-size: .88rem;
+  transition: background-color .15s, color .15s, border-color .15s;
+  border-bottom: none;
+}
+
+.lesson-nav__link:hover {
+  background: var(--bg-alt);
+  color: var(--text-strong);
+  border-bottom-color: transparent;
+}
+
+.lesson-nav__link.is-active {
+  background: var(--bg-alt);
+  color: var(--text-strong);
+  border-left-color: var(--brand);
+}
+
+.lesson-nav__num {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.lesson-nav__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.lesson-nav__sub {
+  font-size: .75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ---------- 12. CONTENIDO DE LECCIONES ---------- */
+.lesson-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.lesson {
+  padding: var(--space-6);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  scroll-margin-top: calc(var(--header-height) + var(--space-4));
+}
+
+.lesson__header {
+  padding-bottom: var(--space-4);
+  border-bottom: 2px solid var(--border);
+  margin-bottom: var(--space-5);
+}
+
+.lesson__num {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--brand-strong);
+  margin-bottom: var(--space-2);
+}
+
+.lesson__title {
+  font-size: 1.6rem;
+  margin-bottom: var(--space-2);
+  color: var(--text-strong);
+}
+
+.lesson__subtitle {
+  color: var(--text-soft);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.lesson__section {
+  margin-bottom: var(--space-5);
+}
+
+.lesson__section:last-child {
+  margin-bottom: 0;
+}
+
+.lesson__section h3 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-soft);
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px dashed var(--border);
+}
+
+.lesson__section p {
+  color: var(--text);
+}
+
+/* Listas dentro de la explicación */
+.lesson__section ul,
+.lesson__section ol {
+  padding-left: 1.4rem;
+  color: var(--text);
+}
+
+.lesson__section li {
+  margin-bottom: var(--space-1);
+}
+
+/* ---------- 09. LISTAS DE FÓRMULAS ---------- */
+.formula-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.formula-block {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.formula-block .formula {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.formula-block__desc {
+  color: var(--text-soft);
+  font-size: .88rem;
+}
+
+/* ---------- 12. EJEMPLOS RESUELTOS ---------- */
+.example-box {
+  padding: var(--space-5);
+  background: color-mix(in srgb, var(--brand) 5%, var(--bg-surface));
+  border: 1px solid color-mix(in srgb, var(--brand) 25%, var(--border));
+  border-radius: var(--radius-md);
+}
+
+.example-box__enunciado {
+  color: var(--text-strong);
+  font-size: 1rem;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px dashed color-mix(in srgb, var(--brand) 30%, transparent);
+}
+
+/* ---------- 12. ACCIONES DE LECCIÓN ---------- */
+.lesson-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .lesson-layout {
+    grid-template-columns: 1fr;
+  }
+  .lesson-nav {
+    position: static;
+    max-height: none;
+    order: -1;
+  }
+  .lesson-nav__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-2);
+  }
+  .lesson-nav__list li {
+    margin: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .lesson {
+    padding: var(--space-4);
+  }
+  .lesson__title {
+    font-size: 1.3rem;
+  }
+  .example-box {
+    padding: var(--space-4);
+  }
+}
+
+/* ---------- 13. CATEGORÍAS DE DESAFÍOS ---------- */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.category-card {
+  appearance: none;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--brand);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-left-color: var(--accent-2);
+}
+
+.category-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+.category-card__desc {
+  color: var(--text-soft);
+  font-size: .92rem;
+}
+
+.category-card__meta {
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  color: var(--text-muted);
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+/* ---------- 13. CUESTIONARIO ---------- */
+.quiz {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.quiz__header {
+  margin-bottom: var(--space-5);
+}
+
+.quiz__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.quiz__categoria {
+  font-family: var(--font-mono);
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--brand-strong);
+}
+
+.quiz__contador {
+  font-family: var(--font-mono);
+  font-size: .82rem;
+  color: var(--text-muted);
+}
+
+.progress {
+  height: 6px;
+  background: var(--bg-alt);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress__bar {
+  height: 100%;
+  background: var(--brand);
+  border-radius: 999px;
+  transition: width .3s ease;
+}
+
+.quiz__enunciado {
+  font-size: 1.25rem;
+  color: var(--text-strong);
+  margin-bottom: var(--space-5);
+  line-height: 1.4;
+}
+
+/* ---------- 13. OPCIONES DE RESPUESTA ---------- */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  text-align: left;
+  color: var(--text-strong);
+  transition: border-color .15s, background-color .15s, transform .08s;
+}
+
+.option:hover:not(:disabled) {
+  border-color: var(--brand);
+  background: var(--bg-alt);
+}
+
+.option:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.option__letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: var(--bg-alt);
+  color: var(--text-soft);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: .85rem;
+}
+
+.option__text {
+  flex: 1 1 auto;
+}
+
+/* Estados tras responder */
+.option--correct {
+  border-color: var(--c-success);
+  background: color-mix(in srgb, var(--c-success) 10%, var(--bg-surface));
+}
+
+.option--correct .option__letter {
+  background: var(--c-success);
+  color: #ffffff;
+}
+
+.option--wrong {
+  border-color: var(--c-error);
+  background: color-mix(in srgb, var(--c-error) 10%, var(--bg-surface));
+}
+
+.option--wrong .option__letter {
+  background: var(--c-error);
+  color: #ffffff;
+}
+
+.option--muted {
+  opacity: .55;
+}
+
+/* ---------- 13. ACCIONES DEL CUESTIONARIO ---------- */
+.quiz__actions {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+}
+
+/* ---------- 13. RESULTADO FINAL DEL CUESTIONARIO ---------- */
+.result-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  background: var(--bg-alt);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.result-summary__score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+}
+
+.result-summary__number {
+  font-family: var(--font-mono);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--brand-strong);
+  line-height: 1;
+}
+
+.result-summary__number span {
+  font-size: 1.5rem;
+}
+
+.result-summary__label {
+  font-size: .85rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-muted);
+  margin-top: var(--space-1);
+}
+
+.result-summary__detail p {
+  margin: 0 0 var(--space-1);
+  color: var(--text);
+}
+
+/* ---------- 13. REVISIÓN DE RESPUESTAS ---------- */
+.review-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.review-item {
+  padding: var(--space-3) var(--space-4);
+  border-left: 4px solid var(--border);
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-2);
+}
+
+.review-item--ok  { border-left-color: var(--c-success); }
+.review-item--ko  { border-left-color: var(--c-error); }
+.review-item__head {
+  display: flex;
+  gap: var(--space-2);
+  align-items: baseline;
+  margin-bottom: var(--space-1);
+}
+
+.review-item__num {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.review-item__title {
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.review-item__detail {
+  font-size: .88rem;
+  color: var(--text-soft);
+  margin-bottom: var(--space-2);
+}
+
+.review-item__exp {
+  font-size: .85rem;
+  color: var(--text-soft);
+  padding-top: var(--space-2);
+  border-top: 1px dashed var(--border);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .quiz {
+    padding: var(--space-4);
+  }
+  .quiz__enunciado {
+    font-size: 1.1rem;
+  }
+  .option {
+    padding: var(--space-2) var(--space-3);
+    font-size: .95rem;
+  }
+  .quiz__actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+  .quiz__actions .btn {
+    justify-content: center;
+  }
+  .result-summary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
