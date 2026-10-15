@@ -153,13 +153,19 @@ img, svg { max-width: 100%; display: block; }
   color: var(--text-soft);
   font-size: .95rem;
   border-bottom: 2px solid transparent;
-  transition: color .15s, border-color .15s, background-color .15s;
+  position: relative;
+  isolation: isolate;
+  transition: color .2s ease, border-color .2s ease, background-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
 
-.app-nav a:hover {
+.app-nav a:hover,
+.app-nav a:focus-visible {
   color: var(--text-strong);
-  background: var(--bg-alt);
+  background: var(--brand-soft);
   border-bottom-color: transparent;
+  box-shadow: 0 4px 14px rgba(14, 165, 164, .16);
+  transform: translateY(-2px);
+  outline: none;
 }
 
 .app-nav a.is-active {
@@ -285,6 +291,17 @@ img, svg { max-width: 100%; display: block; }
   gap: var(--space-3);
 }
 
+.hero__actions .btn {
+  transition: transform .18s ease, background-color .15s, border-color .15s, color .15s;
+}
+
+.hero__actions .btn:hover,
+.hero__actions .btn:focus-visible {
+  transform: scale(1.045);
+}
+
+.hero__actions .btn:active { transform: scale(1.02); }
+
 /* ---------- 06. BOTONES ---------- */
 .btn {
   display: inline-flex;
@@ -346,12 +363,22 @@ img, svg { max-width: 100%; display: block; }
   border-left: 4px solid var(--card-accent);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
-  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  z-index: 0;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+.card:hover,
+.card:focus-within {
+  z-index: 2;
+  transform: scale(1.035) translateY(-3px);
+  border-color: color-mix(in srgb, var(--card-accent) 42%, var(--border));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--card-accent) 22%, transparent),
+              0 0 24px color-mix(in srgb, var(--card-accent) 34%, transparent),
+              0 12px 28px rgba(26, 35, 50, .14);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
 }
 
 /* Variantes por magnitud */
@@ -1478,14 +1505,24 @@ img, svg { max-width: 100%; display: block; }
   border-left: 3px solid transparent;
   color: var(--text-soft);
   font-size: .88rem;
-  transition: background-color .15s, color .15s, border-color .15s;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease;
   border-bottom: none;
 }
 
-.lesson-nav__link:hover {
-  background: var(--bg-alt);
+.lesson-nav__link:hover,
+.lesson-nav__link:focus-visible {
+  background: var(--brand-soft);
   color: var(--text-strong);
   border-bottom-color: transparent;
+  border-left-color: var(--brand);
+  box-shadow: 0 3px 12px rgba(14, 165, 164, .12);
+  transform: translateX(3px);
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-nav a,
+  .lesson-nav__link { transition: none; }
 }
 
 .lesson-nav__link.is-active {
